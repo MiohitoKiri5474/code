@@ -82,22 +82,6 @@ deploy:
   repository: http://github.com/Miohitokiri5474/Miohitokiri.github.io.git
   branch: master
 
-neat_enable: true 
-neat_html:
-  enable: true
-  exclude: 
-neat_css:
-  enable: false
-  exclude:
-    - '*.min.css'
-neat_js:
-  enable: true
-  mangle: true
-  output:
-  compress:
-  exclude:
-    - '*.min.js'
-
 symbols_count_time:
   symbols: true
   time: true
