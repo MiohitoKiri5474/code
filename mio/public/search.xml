@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[[APCS] 2019年十月場實作題詳解]]></title>
-    <url>%2Fcode%2FAPCS-19-10%2F</url>
-    <content type="text"><![CDATA[前言因為上次差一題觀念就5 + 5，加上為了以後家教做準備，所以還是去考了成績unknow，這次是在考完當天就動筆寫了 因為這次比較晚報名，所以我是在台南大學考的，不是成大老樣子又assume考場沒換，等到了之後才發現換了 = =所以又急急忙忙的跑過去好險有趕到 免責聲明：因為code都是出了考場後才寫的，手邊沒有測資，所以並不保證在rewrite的過程中沒有出bug problem 1題目原題目太長，以下是濃縮版本 給定一序列，假設有任意 $|Arr[i]-Arr[i - 1]| > 5$ 則把 $Arr[i]$ 改成前三項的中位數（前三項不用改） 解法我是暴力做一下啦，詳細可以看code code123456789101112131415161718192021222324252627282930// by.MiohitoKiri5474#includeusing namespace std;#define pb push_backint main(){ ios::sync_with_stdio ( false ); cin.tie ( 0 ); cout.tie ( 0 ); int n; cin >> n; vector < int > data ( n ), lib; for ( auto &i: data ) cin >> i; for ( int i = 3 ; i < n ; i++ ){ if ( abs ( data[i] - data[i - 1 ] ) > 5 ) lib.clear(); for ( int j = 0 ; j < 3 ; j++ ) lib.pb ( data[i - j] ); sort ( lib.begin(), lib.end() ); data[i] = lib[1]; } for ( auto i: data ) cout < i < m; vector < int > data ( n ), option ( m ), a, b; for ( auto &i: data ) cin >> i; for ( auto &i: option ) cin >> i; reverse ( option.begin(), option.end() ); for ( auto op: option ){ a.clear(), b.clear(); if ( op == 1 ){ for ( int i = 0 ; i < n ; i++ ) if ( i & 1 ) b.pb ( data[i] ); else a.pb ( data[i] ); data = a; for ( auto i: b ) data.pb ( i ); } else if ( op == 2 ){ int aidx = 0, bidx = 0; for ( int i = 0 ; i < n / 2 ; i++ ) a.pb ( data[i] ); for ( int i = n / 2 ; i < n ; i++ ) b.pb ( data[i] ); data.clear(); for ( int i = 0 ; i < n ; i++ ) if ( i & 1 ) data.pb ( b[bidx++] ); else data.pb ( a[aidx++] ); } else{ for ( int i = 0 ; i < n - op ; i++ ) a.pb ( data[i] ); for ( int i = n - op ; i < n ; i++ ) b.pb ( data[i] ); data = b; for ( auto i: a ) data.pb ( i ); } } for ( auto i: data ) cout < i < p >> l >> r; data.resize ( n ); for ( auto &i: data ) cin >> i; cout < dfs ( > p >> l >> r; vector < int > data ( n ); for ( auto &i: data ) cin >> i; for ( int i = 0 ; i < n ; i++ ){ if ( i - l >= 0 ) edges[i].pb ( i - l ); if ( i + r < n ) edges[i].pb ( i + r ); } queue < int > q; memset ( dis, INF, sizeof dis ); q.push ( 0 ); dis[0] = 0; inQ[0] = true; while ( !q.empty() ){ inQ[now = q.front()] = false; q.pop(); for ( auto i: edges[now] ){ if ( dis[i] > dis[now] + 1 ){ dis[i] = dis[now] + 1; if ( !inQ[i] ){ inQ[i] = true; q.push ( i ); } if ( dis[data[i]] > dis[i] ){ dis[data[i]] = dis[i]; if ( !inQ[data[i]] ){ inQ[data[i]] = true; q.push ( data[i] ); } } } } } cout < dis[p] <]]></content>
+    <title><![CDATA[Golang心情隨筆 #1]]></title>
+    <url>%2Fcode%2Fgd-1%2F</url>
+    <content type="text"><![CDATA[我也有點忘記我最初為什麼會接處 Golang 了應該是被「內建平行運算」這個功能燒到了吧，就有點好奇平行運算要怎麼實現像是以前寫的語言如 C++，或是摸過一陣子的 Swift 3, Perl, Python 等等都是線性處理的（？而且學到的理由也是莫名其妙，我本來請我媽幫我訂書，我丟了幾本書單給她其中好像就有一本Golang的語法書雖然後來我跟他說那一本先不用，但是我媽還是幫我訂了所以我就開始翻了起來起初我最不能接受的一點是在用如 Scanf, Printf 等等的函數前面還要先打 package 名稱像是我可以在 C 裡面 #include 後，然後就直接用標頭檔裡面的函數不過在 Golang 裡面做的事情像是這樣： stdio.Scanf ( “%d”, &n ) 之類的（嚴格來說應該是 fmt.Scanf ( “%d”, &n )）但是後來慢慢就習慣了，反正要說最麻煩的語言絕對是Java沒錯ww明明就只是要 print 個 Hello, World! 要寫 class ww . 最近比較有空，所以想說來複習一下 Golang 怎麼寫（？論一個語言怎麼學最快，當然是學會基礎後拿它來做任何事情，像是打演算法競賽或者是拿它來寫程設作業什麼？只能用 C 寫喔沒關係啊，我用 C 產一份 Golang 檔案出來不就好了（Ｘ]]></content>
       <tags>
-        <tag>APCS</tag>
-        <tag>Full Contest Solution</tag>
+        <tag>Golang</tag>
       </tags>
   </entry>
   <entry>
