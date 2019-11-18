@@ -1844,7 +1844,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #33ffa2;
+  background: #863dfb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3013,7 +3013,7 @@ pre .javascript .function {
   }
 }
 body {
-  background: #000 url("/game/images/background.jpg") center center fixed no-repeat;
+  background: #000 url("/code/images/background.jpg") center center fixed no-repeat;
   -moz-background-size: cover;
   background-size: cover;
   font-size: 15px;
@@ -3217,7 +3217,7 @@ textarea {
 b,
 strong {
   font-weight: bold;
-  color: #ff1700;
+  color: #ffa500;
 }
 .posts-expand .post-title-link::before {
   background-color: #fff;
