@@ -1844,7 +1844,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff49;
+  background: #09ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3217,7 +3217,7 @@ textarea {
 b,
 strong {
   font-weight: bold;
-  color: #ff1700;
+  color: #ffa500;
 }
 .posts-expand .post-title-link::before {
   background-color: #fff;
