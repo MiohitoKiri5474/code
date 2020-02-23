@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Golang心情隨筆 #1]]></title>
     <url>%2Fcode%2Fgd-1%2F</url>
-    <content type="text"><![CDATA[我也有點忘記我最初為什麼會接處 Golang 了應該是被「內建平行運算」這個功能燒到了吧，就有點好奇平行運算要怎麼實現像是以前寫的語言如 C++，或是摸過一陣子的 Swift 3, Perl, Python 等等都是線性處理的（？而且學到的理由也是莫名其妙，我本來請我媽幫我訂書，我丟了幾本書單給她其中好像就有一本Golang的語法書雖然後來我跟他說那一本先不用，但是我媽還是幫我訂了所以我就開始翻了起來起初我最不能接受的一點是在用如 Scanf, Printf 等等的函數前面還要先打 package 名稱像是我可以在 C 裡面 #include 後，然後就直接用標頭檔裡面的函數不過在 Golang 裡面做的事情像是這樣： stdio.Scanf ( “%d”, &n ) 之類的（嚴格來說應該是 fmt.Scanf ( “%d”, &n )）但是後來慢慢就習慣了，反正要說最麻煩的語言絕對是Java沒錯ww明明就只是要 print 個 Hello, World! 要寫 class ww . 最近比較有空，所以想說來複習一下 Golang 怎麼寫（？論一個語言怎麼學最快，當然是學會基礎後拿它來做任何事情，像是打演算法競賽或者是拿它來寫程設作業什麼？只能用 C 寫喔沒關係啊，我用 C 產一份 Golang 檔案出來不就好了（Ｘ]]></content>
+    <content type="text"><![CDATA[我也有點忘記我最初為什麼會接觸 Golang 了應該是被「內建平行運算」這個功能燒到了吧，就有點好奇平行運算要怎麼實現像是以前寫的語言如 C++，或是摸過一陣子的 Swift 3, Perl, Python 等等都是線性處理的（？而且學到的理由也是莫名其妙，我本來請我媽幫我訂書，我丟了幾本書單給她其中好像就有一本Golang的語法書雖然後來我跟他說那一本先不用，但是我媽還是幫我訂了所以我就開始翻了起來起初我最不能接受的一點是在用如 Scanf, Printf 等等的函數前面還要先打 package 名稱像是我可以在 C 裡面 #include 後，然後就直接用標頭檔裡面的函數不過在 Golang 裡面做的事情像是這樣： stdio.Scanf ( “%d”, &n ) 之類的（嚴格來說應該是 fmt.Scanf ( “%d”, &n )）但是後來慢慢就習慣了，反正要說最麻煩的語言絕對是Java沒錯ww明明就只是要 print 個 Hello, World! 要寫 class ww . 最近比較有空，所以想說來複習一下 Golang 怎麼寫（？論一個語言怎麼學最快，當然是學會基礎後拿它來做任何事情，像是打演算法競賽或者是拿它來寫程設作業什麼？只能用 C 寫喔沒關係啊，我用 C 產一份 Golang 檔案出來不就好了（Ｘ 不過後來這個想法就不了了之了，因為沒有權限裝 Golang 的編譯器]]></content>
       <tags>
         <tag>Golang</tag>
       </tags>
@@ -48,8 +48,8 @@
     <url>%2Fcode%2FCFR521%2F</url>
     <content type="text"><![CDATA[前言身為一個垃圾，當然要打的像垃圾一樣先是校內爆掉，現在換 div.3 爆掉。。。pC 沒開 long long 溢位被 hack 成智障的就是我坐等晚上 rating change沒意外應該會噴掉啦 先放上所有題目的連結 problem A題目大意就是，假設在奇數回合往右走 $a$ 步，偶數回合往左走 $b$ 步然後請問第 $K$ 回合現在位置在哪（假設起始位置為 $0$ 且向右為正） 解法阿不就直接暴力就好算一下會往左次往右幾次，算一下就好 code1234567891011121314151617181920212223// by. MiohitoKiri5474#includeusing namespace std;typedef long long LL;int main(){ ios::sync_with_stdio ( false ); cin.tie ( 0 ); #define int LL int t, k, a, b, swp, ans; cin >> t; while ( t-- ){ cin >> a >> b >> k; swp = a - b; ans = swp * ( LL ) ( k / 2 ); if ( k & 1 ) ans += a; cout < ans < n; vector < int > data ( n ), lib; for ( auto &i: data ) cin >> i; for ( int i = 1 ; i < n - 1 ; i++ ){ if ( !data[i] && data[i - 1] && data[i + 1] ) lib.push_back ( i ); } m = lib.size(); while ( lib.size() > 1 ){ if ( lib[1] - lib[0] == 2 ){ ans++; lib.erase ( lib.begin() ); lib.erase ( lib.begin() ); } else{ ans++; lib.erase ( lib.begin() ); } } if ( !lib.empty() ) ans++; cout < ans < n; vector < int > data ( n ), ans; for ( auto &i: data ){ cin >> i; sum += i; lib[i]++; } for ( int i = 0 ; i < n ; i++ ){ sum -= data[i]; if ( sum & 1 ){ sum += data[i]; continue; } sum >>= 1; if ( ( lib[sum] == 1 && sum != data[i] ) || lib[sum] > 1 ){ ans.push_back ( i + 1 ); } sum]]></content>
       <tags>
-        <tag>Full Contest Solution</tag>
         <tag>CodeForces</tag>
+        <tag>Full Contest Solution</tag>
         <tag>div.3</tag>
         <tag>dp</tag>
       </tags>
@@ -89,8 +89,8 @@
       <tags>
         <tag>dfs</tag>
         <tag>TOJ</tag>
-        <tag>MST</tag>
         <tag>dsu</tag>
+        <tag>MST</tag>
         <tag>樹直徑</tag>
         <tag>Kruskal</tag>
       </tags>

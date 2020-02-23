@@ -6,7 +6,7 @@
   <link href="/code/atom.xml" rel="self"/>
   
   <link href="https://miohitokiri5474.github.io/code/"/>
-  <updated>2019-11-09T02:05:05.154Z</updated>
+  <updated>2020-02-23T09:11:12.550Z</updated>
   <id>https://miohitokiri5474.github.io/code/</id>
   
   <author>
@@ -21,13 +21,13 @@
     <link href="https://miohitokiri5474.github.io/code/gd-1/"/>
     <id>https://miohitokiri5474.github.io/code/gd-1/</id>
     <published>2019-11-08T07:28:17.000Z</published>
-    <updated>2019-11-09T02:05:05.154Z</updated>
+    <updated>2020-02-23T09:11:12.550Z</updated>
     
-    <content type="html"><![CDATA[<html><head></head><body><p>我也有點忘記我最初為什麼會接處 Golang 了<br>應該是被「內建平行運算」這個功能燒到了吧，就有點好奇平行運算要怎麼實現<br>像是以前寫的語言如 C++，或是摸過一陣子的 Swift 3, Perl, Python 等等都是線性處理的（？<br><a id="more"></a><br>而且學到的理由也是莫名其妙，我本來請我媽幫我訂書，我丟了幾本書單給她<br>其中好像就有一本Golang的語法書<br>雖然後來我跟他說那一本先不用，但是我媽還是幫我訂了<br>所以我就開始翻了起來<br>起初我最不能接受的一點是在用如 Scanf, Printf 等等的函數前面還要先打 package 名稱<br>像是我可以在 C 裡面 #include<stdio.h> 後，然後就直接用標頭檔裡面的函數<br>不過在 Golang 裡面做的事情像是這樣： stdio.Scanf ( “%d”, &n ) 之類的<br>（嚴格來說應該是 fmt.Scanf ( “%d”, &n )）<br>但是後來慢慢就習慣了，反正要說最麻煩的語言絕對是Java沒錯ww<br>明明就只是要 print 個 Hello, World! 要寫 class ww</stdio.h></p><p>.</p><p>最近比較有空，所以想說來複習一下 Golang 怎麼寫（？<br>論一個語言怎麼學最快，當然是學會基礎後拿它來做任何事情，像是打演算法競賽<br>或者是拿它來寫程設作業<br>什麼？只能用 C 寫喔<br>沒關係啊，我用 C 產一份 Golang 檔案出來不就好了（Ｘ</p></body></html>]]></content>
+    <content type="html"><![CDATA[<html><head></head><body><p>我也有點忘記我最初為什麼會接觸 Golang 了<br>應該是被「內建平行運算」這個功能燒到了吧，就有點好奇平行運算要怎麼實現<br>像是以前寫的語言如 C++，或是摸過一陣子的 Swift 3, Perl, Python 等等都是線性處理的（？<br><a id="more"></a><br>而且學到的理由也是莫名其妙，我本來請我媽幫我訂書，我丟了幾本書單給她<br>其中好像就有一本Golang的語法書<br>雖然後來我跟他說那一本先不用，但是我媽還是幫我訂了<br>所以我就開始翻了起來<br>起初我最不能接受的一點是在用如 Scanf, Printf 等等的函數前面還要先打 package 名稱<br>像是我可以在 C 裡面 #include<stdio.h> 後，然後就直接用標頭檔裡面的函數<br>不過在 Golang 裡面做的事情像是這樣： stdio.Scanf ( “%d”, &n ) 之類的<br>（嚴格來說應該是 fmt.Scanf ( “%d”, &n )）<br>但是後來慢慢就習慣了，反正要說最麻煩的語言絕對是Java沒錯ww<br>明明就只是要 print 個 Hello, World! 要寫 class ww</stdio.h></p><p>.</p><p>最近比較有空，所以想說來複習一下 Golang 怎麼寫（？<br>論一個語言怎麼學最快，當然是學會基礎後拿它來做任何事情，像是打演算法競賽<br>或者是拿它來寫程設作業<br>什麼？只能用 C 寫喔<br>沒關係啊，我用 C 產一份 Golang 檔案出來不就好了（Ｘ</p><p>不過後來這個想法就不了了之了，因為沒有權限裝 Golang 的編譯器</p></body></html>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;我也有點忘記我最初為什麼會接處 Golang 了&lt;br&gt;應該是被「內建平行運算」這個功能燒到了吧，就有點好奇平行運算要怎麼實現&lt;br&gt;像是以前寫的語言如 C++，或是摸過一陣子的 Swift 3, Perl, Python 等等都是線性處理的（？&lt;br&gt;
+      &lt;p&gt;我也有點忘記我最初為什麼會接觸 Golang 了&lt;br&gt;應該是被「內建平行運算」這個功能燒到了吧，就有點好奇平行運算要怎麼實現&lt;br&gt;像是以前寫的語言如 C++，或是摸過一陣子的 Swift 3, Perl, Python 等等都是線性處理的（？&lt;br&gt;
     
     </summary>
     
@@ -144,9 +144,9 @@
     </summary>
     
     
-      <category term="Full Contest Solution" scheme="https://miohitokiri5474.github.io/code/tags/Full-Contest-Solution/"/>
-    
       <category term="CodeForces" scheme="https://miohitokiri5474.github.io/code/tags/CodeForces/"/>
+    
+      <category term="Full Contest Solution" scheme="https://miohitokiri5474.github.io/code/tags/Full-Contest-Solution/"/>
     
       <category term="div.3" scheme="https://miohitokiri5474.github.io/code/tags/div-3/"/>
     
@@ -242,9 +242,9 @@
     
       <category term="TOJ" scheme="https://miohitokiri5474.github.io/code/tags/TOJ/"/>
     
-      <category term="MST" scheme="https://miohitokiri5474.github.io/code/tags/MST/"/>
-    
       <category term="dsu" scheme="https://miohitokiri5474.github.io/code/tags/dsu/"/>
+    
+      <category term="MST" scheme="https://miohitokiri5474.github.io/code/tags/MST/"/>
     
       <category term="樹直徑" scheme="https://miohitokiri5474.github.io/code/tags/%E6%A8%B9%E7%9B%B4%E5%BE%91/"/>
     
