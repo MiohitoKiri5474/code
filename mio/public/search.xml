@@ -48,8 +48,8 @@
     <url>%2Fcode%2FCFR521%2F</url>
     <content type="text"><![CDATA[前言身為一個垃圾，當然要打的像垃圾一樣先是校內爆掉，現在換 div.3 爆掉。。。pC 沒開 long long 溢位被 hack 成智障的就是我坐等晚上 rating change沒意外應該會噴掉啦 先放上所有題目的連結 problem A題目大意就是，假設在奇數回合往右走 $a$ 步，偶數回合往左走 $b$ 步然後請問第 $K$ 回合現在位置在哪（假設起始位置為 $0$ 且向右為正） 解法阿不就直接暴力就好算一下會往左次往右幾次，算一下就好 code1234567891011121314151617181920212223// by. MiohitoKiri5474#includeusing namespace std;typedef long long LL;int main(){ ios::sync_with_stdio ( false ); cin.tie ( 0 ); #define int LL int t, k, a, b, swp, ans; cin >> t; while ( t-- ){ cin >> a >> b >> k; swp = a - b; ans = swp * ( LL ) ( k / 2 ); if ( k & 1 ) ans += a; cout < ans < n; vector < int > data ( n ), lib; for ( auto &i: data ) cin >> i; for ( int i = 1 ; i < n - 1 ; i++ ){ if ( !data[i] && data[i - 1] && data[i + 1] ) lib.push_back ( i ); } m = lib.size(); while ( lib.size() > 1 ){ if ( lib[1] - lib[0] == 2 ){ ans++; lib.erase ( lib.begin() ); lib.erase ( lib.begin() ); } else{ ans++; lib.erase ( lib.begin() ); } } if ( !lib.empty() ) ans++; cout < ans < n; vector < int > data ( n ), ans; for ( auto &i: data ){ cin >> i; sum += i; lib[i]++; } for ( int i = 0 ; i < n ; i++ ){ sum -= data[i]; if ( sum & 1 ){ sum += data[i]; continue; } sum >>= 1; if ( ( lib[sum] == 1 && sum != data[i] ) || lib[sum] > 1 ){ ans.push_back ( i + 1 ); } sum]]></content>
       <tags>
-        <tag>CodeForces</tag>
         <tag>Full Contest Solution</tag>
+        <tag>CodeForces</tag>
         <tag>div.3</tag>
         <tag>dp</tag>
       </tags>
@@ -89,8 +89,8 @@
       <tags>
         <tag>dfs</tag>
         <tag>TOJ</tag>
-        <tag>dsu</tag>
         <tag>MST</tag>
+        <tag>dsu</tag>
         <tag>樹直徑</tag>
         <tag>Kruskal</tag>
       </tags>
@@ -170,8 +170,8 @@
     <url>%2Fcode%2FTOJ-365%2F</url>
     <content type="text"><![CDATA[題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 == a_j ( i + 1 == j )$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址 解法先定義一個資料型態 $piece$，裡面包含了一個愉悅龍貓群的資料：開始位置、結束位置、長度（長度可有可無，只是計算上方便） 接著定義另外一種資料型態，用在線段樹上維護的 $node$$node$ 包含三個 $piece$，分別是這區間內，從區間頭開始的愉悅龍貓群、最長愉悅龍貓群、結束於區間尾的愉悅龍貓群，總共三個 在 up 兩個 $node$ 的時候（假設兩個$node$分別叫 $l, r $、up 後的 $node$ 叫 $stop$ 好了，相對位置 $l$ 在 $r$ 前面），$l.fro$ 一定是 $stop.fro$ ————因為在這兩個區間裡，最前面的愉悅龍貓群一定是 $l.fro$，同理，$stop.bck$ 一定是 $r.bck$ 那麼，$stop.ma$ 呢？ $stop.ma$ 有兩種可能性，第一種就是 $l.ma$ 或 $r.ma$ 的其中一個（看誰長度大就誰），另外一種就是，如果 $merge ( l.bck, r.fro )$也是一個愉悅龍貓群的時候，可能會比 $l.ma$ 或 $r.ma$ 還要大 總結其實這題不難，只是 coding 有點複雜，query & update 都與正常的線段樹差不多，只是 up 需要思考一下（？） code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596// by. MiohitoKiri5474#includeusing namespace std;#define maxN 100005struct piece{ int f, s, sz;};inline bool same ( piece a, piece b ){ return a.f == b.f && a.s == b.s;}struct node{ piece fro, bck, ma;} seg[maxN < R.ma.sz ? L.ma : R.ma ); if ( basic[L.bck.s] + 1 == basic[R.fro.f] ){ piece stop = piece { L.bck.f, R.fro.s, R.fro.s - L.bck.f + 1 }; if ( same ( L.fro, L.bck ) ) res.fro = stop; if ( same ( R.fro, R.bck ) ) res.bck = stop; res.ma = ( stop.sz > res.ma.sz ? stop : res.ma ); } return res;}inline void build ( int l, int r, int n ){ if ( l == r ) seg[n].fro = seg[n].bck = seg[n].ma = piece { l, r, 1 }; else{ int mid = ( l + r ) >> 1, leftSon = n < > 1, leftSon = n < > type >> l >> r; if ( type == 1 ){ basic[l] = r; update ( 1, n, l, 1 ); } else cout < query ( l, r,]]></content>
       <tags>
+        <tag>segment tree</tag>
         <tag>TOJ</tag>
-        <tag>segmant tree</tag>
       </tags>
   </entry>
   <entry>
