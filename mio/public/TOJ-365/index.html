@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 == a_j ( i + 1 == j )$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
+<meta name="description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 = a_{i + 1}$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
 <meta name="keywords" content="segment tree,TOJ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[TOJ][365]G.大龍貓">
 <meta property="og:url" content="https://miohitokiri5474.github.io/code/TOJ-365/index.html">
 <meta property="og:site_name" content="Coder MiohitoKiri">
-<meta property="og:description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 == a_j ( i + 1 == j )$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
+<meta property="og:description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 = a_{i + 1}$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-29T17:58:50.281Z">
+<meta property="og:updated_time" content="2020-04-29T18:02:08.667Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[TOJ][365]G.大龍貓">
-<meta name="twitter:description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 == a_j ( i + 1 == j )$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
+<meta name="twitter:description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 = a_{i + 1}$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
 
 
 
@@ -373,7 +373,7 @@
       
 
       
-        <meta name="generator" content="Hexo 3.9.0"><h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>給定一個數列，為一群龍貓的『高度』<br>定義只要 $a_i + 1 == a_j ( i + 1 == j )$ 就稱為愉悅龍貓群<br>請實作出支援單點修改及區間查詢的 code<br><a href="http://toj.tfcis.org/oj/pro/365/" target="_blank" rel="noopener">題目原網址</a></p>
+        <meta name="generator" content="Hexo 3.9.0"><h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>給定一個數列，為一群龍貓的『高度』<br>定義只要 $a_i + 1 = a_{i + 1}$ 就稱為愉悅龍貓群<br>請實作出支援單點修改及區間查詢的 code<br><a href="http://toj.tfcis.org/oj/pro/365/" target="_blank" rel="noopener">題目原網址</a></p>
 <a id="more"></a>
 <h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>先定義一個資料型態 $piece$，裡面包含了一個愉悅龍貓群的資料：開始位置、結束位置、長度（長度可有可無，只是計算上方便）</p>
 <p>接著定義另外一種資料型態，用在線段樹上維護的 $node$<br>$node$ 包含三個 $piece$，分別是這區間內，從區間頭開始的愉悅龍貓群、最長愉悅龍貓群、結束於區間尾的愉悅龍貓群，總共三個</p>
