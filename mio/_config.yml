@@ -108,3 +108,6 @@ sitemap:
   path: sitemap.xml
 
 google_analytics: UA-151767837-1
+
+encrypt:
+  enable: true

@@ -84,7 +84,7 @@
 <meta name="description" content="生きている事。 ああ、それは、何というやりきれない息もたえだえの大事業であろうか。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Coder MiohitoKiri">
-<meta property="og:url" content="https://miohitokiri5474.github.io/code/tags/segment-tree/index.html">
+<meta property="og:url" content="https://miohitokiri5474.github.io/code/tags/Segment-Tree/index.html">
 <meta property="og:site_name" content="Coder MiohitoKiri">
 <meta property="og:description" content="生きている事。 ああ、それは、何というやりきれない息もたえだえの大事業であろうか。">
 <meta property="og:locale" content="en">
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://miohitokiri5474.github.io/code/tags/segment-tree/">
+  <link rel="canonical" href="https://miohitokiri5474.github.io/code/tags/Segment-Tree/">
 
 
 
 
 
-  <title>Tag: segment tree | Coder MiohitoKiri</title>
+  <title>Tag: Segment Tree | Coder MiohitoKiri</title>
   
 
 
@@ -297,7 +297,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h2>segment tree<small>Tag</small>
+        <h2>Segment Tree<small>Tag</small>
         </h2>
       </div>
 
@@ -309,69 +309,17 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/code/CF-920F/" itemprop="url">
+            <a class="post-title-link" href="/code/ncku-icpc-2020-week9-dlc/" itemprop="url">
               
-                <span itemprop="name">[CF][920F] F. SUM AND REPLACE</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-04-03T11:25:31+08:00" content="2018-04-03">
-          04-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/code/TOJ-391/" itemprop="url">
-              
-                <span itemprop="name">[TOJ][391] E. 模數 CANDY</span>
+                <span itemprop="name">進階資料結構 for NCKU-ICPC Week 9</span>
               
             </a>
         
       </h3>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-02-07T09:17:56+08:00" content="2018-02-07">
-          02-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/code/TOJ-365/" itemprop="url">
-              
-                <span itemprop="name">[TOJ][365]G.大龍貓</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2017-12-26T20:50:14+08:00" content="2017-12-26">
-          12-26
+        <time class="post-time" itemprop="dateCreated" datetime="2020-05-02T17:54:39+08:00" content="2020-05-02">
+          05-02
         </time>
       </div>
 
@@ -433,7 +381,7 @@
               
                 <a href="/code/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -446,7 +394,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/code/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -977,6 +925,63 @@
     $('.popup-btn-close').click(onPopupClose);
     $('.popup').click(function(e){
       e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/code/js/src/exturl.js?v=5.1.4"></script>
+
+
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/lazyload-plugin/lazyload.intersectionObserver.min.js"></script></body></html>();
     });
     $(document).on('keyup', function (event) {
       var shouldDismissSearchPopup = event.which === 27 &&

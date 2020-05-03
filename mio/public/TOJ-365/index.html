@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Coder MiohitoKiri">
 <meta property="og:description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 = a_{i + 1}$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-29T18:02:08.667Z">
+<meta property="og:updated_time" content="2020-05-03T02:02:57.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[TOJ][365]G.大龍貓">
 <meta name="twitter:description" content="題目給定一個數列，為一群龍貓的『高度』定義只要 $a_i + 1 = a_{i + 1}$ 就稱為愉悅龍貓群請實作出支援單點修改及區間查詢的 code題目原網址">
@@ -377,7 +377,7 @@
 <a id="more"></a>
 <h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>先定義一個資料型態 $piece$，裡面包含了一個愉悅龍貓群的資料：開始位置、結束位置、長度（長度可有可無，只是計算上方便）</p>
 <p>接著定義另外一種資料型態，用在線段樹上維護的 $node$<br>$node$ 包含三個 $piece$，分別是這區間內，從區間頭開始的愉悅龍貓群、最長愉悅龍貓群、結束於區間尾的愉悅龍貓群，總共三個</p>
-<p>在 up 兩個 $node$ 的時候（假設兩個$node$分別叫 $l, r $、up 後的 $node$ 叫 $stop$ 好了，相對位置 $l$ 在 $r$ 前面），$l.fro$ 一定是 $stop.fro$ ————因為在這兩個區間裡，最前面的愉悅龍貓群一定是 $l.fro$，同理，$stop.bck$ 一定是 $r.bck$</p>
+<p>在 up 兩個 $node$ 的時候（假設兩個 $node$ 分別叫 $l, r $、up 後的 $node$ 叫 $stop$ 好了，相對位置 $l$ 在 $r$ 前面），$l.fro$ 一定是 $stop.fro$ ————因為在這兩個區間裡，最前面的愉悅龍貓群一定是 $l.fro$，同理，$stop.bck$ 一定是 $r.bck$</p>
 <p>那麼，$stop.ma$ 呢？</p>
 <p>$stop.ma$ 有兩種可能性，第一種就是 $l.ma$ 或 $r.ma$ 的其中一個（看誰長度大就誰），另外一種就是，如果 $merge ( l.bck, r.fro )$也是一個愉悅龍貓群的時候，可能會比 $l.ma$ 或 $r.ma$ 還要大</p>
 <h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>其實這題不難，只是 coding 有點複雜，query & update 都與正常的線段樹差不多，只是 up 需要思考一下（？）</p>
@@ -523,7 +523,7 @@
               
                 <a href="/code/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -536,7 +536,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/code/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
