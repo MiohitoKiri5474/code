@@ -147,6 +147,7 @@ int main(){
 
 因為要保留舊版本，所以對所有需要被修改的節點新開一個位置來
 並且把左右子結點的指標，指向原本左右子結點的位置
+接著就是如前面講的，直接上持久化
 
 ```cpp
 // by. MiohitoKiri5474
@@ -286,6 +287,8 @@ Emmm，但是感覺好像怪怪的
 
 聽起來很複雜，但是其實一點也不
 
+#### piece
+
 為了方便編寫，我們先定義一個 piece，還有如何辨識兩個 piece 是否相同
 
 ```cpp
@@ -307,6 +310,8 @@ inline bool same ( piece a, piece b ){
 $l, r$ 就是這個區間的左右界
 $sz$ 是大小，可有可無，只是寫 code 上方便
 
+#### node
+
 然後是 node
 
 ```cpp
@@ -317,6 +322,8 @@ struct node{
 
 $front, back$ 分別為是記錄當前線段樹區間內，從左邊界開始的好序列長度，以及從右邊屆開始的好序列長度
 $ma$ 則是記錄當前線段樹區間內，最長的好序列長度
+
+#### merge
 
 接著來寫合併兩個區間的函數吧，因為沒有內建的函數可以用，只能自己寫一下
 
@@ -348,9 +355,127 @@ inline node merge ( node L, node R ){
 | back           | r.back                                           |
 | ma             | l.ma, r.ma, l.back + r.back 這三者中的最長好序列 |
 
+然後 update 以及 query 跟一般版的線段樹大同小異，可以自行閱讀面完整的 code
 
+#### code
 
+```cpp
+// by. MiohitoKiri5474
+#include<bits/stdc++.h>
 
+using namespace std;
+
+#define maxN 100005
+
+struct piece{
+	int l, r, sz;
+
+	// 檢查兩個 piece 是否相同
+	bool operator == ( const piece b ){
+		return l == b.l && r == b.r;
+	}
+};
+
+// 不想寫 operator（或是覺得太麻煩）可以這樣寫
+inline bool same ( piece a, piece b ){
+	return a.l == b.l && a.r == b.r;
+}
+
+struct node{
+	piece front, back, ma;
+} seg[maxN << 2];
+
+int basic[maxN];
+
+inline node merge ( node L, node R ){
+    node res;
+	res.front = L.front, res.back = R.back, res.ma = ( L.ma.sz > R.ma.sz ? L.ma : R.ma );
+
+	if ( basic[L.back.r] + 1 == basic[R.front.l] ){
+		piece swp = piece { L.back.l, R.front.r, R.front.r - L.back.l + 1 };
+
+		if ( L.front == L.back )
+			res.front = swp;
+		if ( R.front == R.back )
+			res.back = swp;
+
+		res.ma = ( swp.sz > res.ma.sz ? swp : res.ma );
+	}
+
+	return res;
+}
+
+void update ( int l, int r, int index, int value, int n ){
+	if ( l == r )
+		seg[n].front = seg[n].back = seg[n].ma = piece { l, l, 1 };
+	else{
+		int mid = ( l + r ) >> 1, leftSon = n << 1, rightSon = leftSon | 1;
+		if ( index <= mid )
+			update ( l, mid, index, value, leftSon );
+		else
+			update ( mid + 1, r, index, value, rightSon );
+
+		seg[n] = merge ( seg[leftSon], seg[rightSon] );
+	}
+}
+
+node query ( int l, int r, int nowL, int nowR, int n ){
+	if ( l <= nowL && nowR <= r )
+		return seg[n];
+	int mid = ( nowL + nowR ) >> 1, leftSon = n << 1, rightSon = leftSon | 1;
+	if ( r <= mid )
+		return query ( l, r, nowL, mid, leftSon );
+	if ( mid < l )
+		return query ( l, r, mid + 1, nowR, rightSon );
+
+	return merge ( query ( l, r, nowL, mid, leftSon ), query ( l, r, mid + 1, nowR, rightSon ) );
+}
+
+int main(){
+	ios::sync_with_stdio ( false );
+	cin.tie ( 0 );
+	cout.tie ( 0 );
+
+	int n, m, type, l, r;
+	cin >> n;
+	for ( int i = 1 ; i <= n ; i++ ){
+		cin >> basic[i];
+		update ( 1, n, i, basic[i], 1 );
+	}
+
+	cin >> m;
+	while ( m-- ){
+		cin >> type >> l >> r;
+		if ( type == 1 ){
+			basic[l] = r;
+			update ( 1, n, l, r, 1 );
+		}
+		else
+			cout << query ( l, r, 1, n, 1 ).ma.sz << '\n';
+	}
+}
+```
+
+### 動態開點線段樹
+
+#### 已經成習慣的先看題目
+
+>給定一條長度為 $N$、元素皆為 0 的序列，並且有 $M$ 筆操作，操作內容如下
+>
+>1. 將區間 $[l, r]$ 的元素都改為 $0$
+>2. 將區間 $[l, r]$ 的元素都改為 $1$
+>3. 查詢區間 $[l, r]$ 之間，共有幾個團
+>
+>定義團：相鄰的元素皆為 $1$ 的區間
+>
+>$N \le 10^9, M \le 10^5, 0 \le l, r \le N$
+>
+>原題目為 TOJ 242 G. 色彩繽紛，原題目網址在[這裡](https://toj.tfcis.org/oj/pro/242/)
+
+看到區間第一個想到的是線段樹
+再看一下範圍，$10^9$ 會爆炸，線段樹開不下去
+
+但是如果一整個區間都沒有變
 
 ## 後記
 
