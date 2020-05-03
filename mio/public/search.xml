@@ -48,8 +48,8 @@
     <url>%2Fcode%2FTIOJ-1909%2F</url>
     <content type="text"><![CDATA[題目原題目連結據說是 2015TOI 三模的題目簡單來說，就是給定一數列代表一排石柱，並且任意石柱 $A$ 可以到達的石柱有： 從 $A$ 左邊第一個比 $A$ 高的石柱 $B$，以及從 $A$ 往右找的第一個比$A$高的石柱 $C$，其中高度比較低的石柱，其中如果 $B$ 或 $C$ 其中一個不存在，則連結到存在的那一個 假設 $D$ 可以連結到 $A$ 的話（$D的高度 \lt A$），那麼$A$也可以到 $D$ 求所有石柱中，被最多條簡單路經過的石柱，其被走過的次數及編號如果有多組解，輸出編號最小的 解法我們先來釐清一下什麼是簡單路徑好了所謂的簡單路徑，就是起點終點不重複，且路徑上經過的點不重複的路徑 建圖看到路徑，我第一個想到的是圖論我們先想一下，要怎麼把圖建出來 暴力 $O ( N^2 )$$N^2$ 就爆搜啊，按照題目寫的，往左往右找比他大的然後做比較12345678910111213141516171819202122232425#define UNI(u,v,edge) edge[u].pb ( v ), edge[v].pb ( u )for ( int i = 0 ; i < n ; i++ ){ int l = -1, r = n; for ( int j = i - 1 ; j >= 0 ; j-- ) if ( data[j] > data[i] ){ l = j; break; } for ( int j = i + 1 ; j < n ; j++ ) if ( data[j] > data[i] ){ r = j; break; } if ( l == -1 && r == n ) continue; if ( l == -1 ){ UNI ( r, i, edges ); continue; } if ( r == n ){ UNI ( l, i, edges ); continue; } UNI ( ( data[l] < data[r] ? l : r ), i, edges );} 線段樹 $O ( NlogN )$然後我就想到線段樹了$index$ 是做離散化後的數字，$value$ 是編號然後就可以開兩顆線段樹，一顆紀錄左手邊的最大值，一邊紀錄右邊最小值一開始右手邊的最小值線段樹，裡面有$N$個點每處理完一個點，就把這個點拔掉丟到左邊去code大概像這樣123456789101112131415161718192021222324252627282930313233343536#define UNI(u,v,edge) edge[u].pb ( v ), edge[v].pb ( u )#define INF 0x3f3f3f3f// function// 線段樹1是紀錄最小值、右手邊的線段樹// 而線段數2是紀錄最大值、左手邊的線段樹int seg1[maxN <]]></content>
       <tags>
-        <tag>TIOJ</tag>
         <tag>graph</tag>
+        <tag>TIOJ</tag>
       </tags>
   </entry>
   <entry>

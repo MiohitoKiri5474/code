@@ -356,7 +356,7 @@ font:
 # MathJax Support
 mathjax:
   enable: true
-  per_page: false
+  per_page: true
   cdn: https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
