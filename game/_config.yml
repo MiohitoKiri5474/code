@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Gamer MiohitoKiri
+title: Coder MiohitoKiri
 subtitle:
 description: 生きている事。 ああ、それは、何というやりきれない息もたえだえの大事業であろうか。
 keywords:
@@ -13,8 +13,8 @@ timezone: Asia/Taipei
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://miohitokiri5474.github.io/game
-root: /game
+url: https://miohitokiri5474.github.io/code/
+root: /code/
 permalink: :title/
 permalink_defaults:
 
@@ -79,24 +79,8 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/MiohitoKiri5474/game.git
+  repository: http://github.com/Miohitokiri5474/Miohitokiri.github.io.git
   branch: master
-
-neat_enable: true 
-neat_html:
-  enable: true
-  exclude: 
-neat_css:
-  enable: false
-  exclude:
-    - '*.min.css'
-neat_js:
-  enable: true
-  mangle: true
-  output:
-  compress:
-  exclude:
-    - '*.min.js'
 
 symbols_count_time:
   symbols: true
@@ -122,3 +106,48 @@ lazyload:
 
 sitemap: 
   path: sitemap.xml
+
+google_analytics: UA-151767837-1
+
+encrypt:
+  enable: true
+
+# Markdown-it config
+# Docs: https://github.com/hexojs/hexo-renderer-markdown-it/wiki
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+    - markdown-it-deflist
+    - markdown-it-imsize
+    - markdown-it-mark
+    - markdown-it-regexp
+    - markdown-it-task-checkbox
+    - name: markdown-it-container
+      options: success
+    - name: markdown-it-container
+      options: info
+    - name: markdown-it-container
+      options: warning
+    - name: markdown-it-container
+      options: danger
+    - markdown-it-deflist
+    - name: markdown-it-emoji
+      options:
+        shortcuts: {}
+  anchors:
+    level: 1
+    collisionSuffix: 'v'
+    permalink: true
+    permalinkClass: header-anchor
+    permalinkSymbol: ''
