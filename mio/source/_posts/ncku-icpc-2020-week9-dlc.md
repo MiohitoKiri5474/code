@@ -5,6 +5,7 @@ tags:
  - Data Structure
  - Segment Tree
 password: maiismywife
+
 ---
 
 # Week 9 DLC
@@ -15,6 +16,8 @@ password: maiismywife
 不過一來是筆者的期中快要爆炸，沒有空做簡報
 另一方面由於授課內容偏難，放在影片中可能會讓影片長度暴增（像是變成三個小時）
 因此決定另外寫一篇文章來當作補充內容，並且發在自己的部落格
+
+<!--more-->
 
 ## 線段樹 Extra
 
@@ -339,7 +342,15 @@ inline node merge ( node L, node R ){
 }
 ```
 
-合併兩個區間後，要回傳的 res ( node )，為
+合併兩個區間後，要回傳的 res 內容如下
+
+| res 內的 piece | 來源                                             |
+| -------------- | ------------------------------------------------ |
+| front          | l.front                                          |
+| back           | r.back                                           |
+| ma             | l.ma, r.ma, l.back + r.back 這三者中的最長好序列 |
+
+
 
 
 
