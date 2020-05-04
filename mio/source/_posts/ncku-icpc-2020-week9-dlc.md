@@ -63,83 +63,83 @@ password: maiismywife
 using namespace std;
 
 struct node{
-	node *l, *r;
-	int value;
+    node *l, *r;
+    int value;
 
-	node ( int _val ): l ( nullptr ), r ( nullptr ), value ( _val ) {}
+    node ( int _val ): l ( nullptr ), r ( nullptr ), value ( _val ) {}
 
-	inline void up ( void ){
-		value = -1;
-		if ( l )
-			value = max ( value, l -> value );
-		if ( r )
-			value = max ( value, r -> value );
-	}
+    inline void up ( void ){
+        value = -1;
+        if ( l )
+            value = max ( value, l -> value );
+        if ( r )
+            value = max ( value, r -> value );
+    }
 } *seg = nullptr;
 
 void build ( int l, int r, node *&o ){
-	o = new node ( 0 );
-	if ( l == r )
-		return;
-	int mid = ( l + r ) >> 1;
-	build ( l, mid, o -> l );
-	build ( mid + 1, r, o -> r );
+    o = new node ( 0 );
+    if ( l == r )
+        return;
+    int mid = ( l + r ) >> 1;
+    build ( l, mid, o -> l );
+    build ( mid + 1, r, o -> r );
 
-	o -> up();
+    o -> up();
 }
 
 void update ( int l, int r, int index, int value, node *&o ){
-	if ( l == r )
-		o -> value = value;
-	else{
-		int mid = ( l + r ) >> 1;
-		if ( index <= mid )
-			update ( l, mid, index, value, o -> l );
-		else
-			update ( mid + 1, r, index, value, o -> r );
+    if ( l == r )
+        o -> value = value;
+    else{
+        int mid = ( l + r ) >> 1;
+        if ( index <= mid )
+            update ( l, mid, index, value, o -> l );
+        else
+            update ( mid + 1, r, index, value, o -> r );
 
-		o -> up();
-	}
+        o -> up();
+    }
 }
 
 int query ( int l, int r, int nowL, int nowR, node *o ){
-	if ( l <= nowR && nowR <= r )
-		return o -> value;
-	int mid = ( nowL + nowR ) >> 1;
-	if ( r <= mid )
-		return query ( l, r, nowL, mid, o -> l );
-	if ( mid < l )
-		return query ( l, r, mid + 1, nowR, o -> r );
+    if ( l <= nowR && nowR <= r )
+        return o -> value;
+    int mid = ( nowL + nowR ) >> 1;
+    if ( r <= mid )
+        return query ( l, r, nowL, mid, o -> l );
+    if ( mid < l )
+        return query ( l, r, mid + 1, nowR, o -> r );
 
-	return max ( query ( l, r, nowL, mid, o -> l ), query ( l, r, mid + 1, nowR, o -> r ) );
+    return max ( query ( l, r, nowL, mid, o -> l ), query ( l, r, mid + 1, nowR, o -> r ) );
 }
 
 int main(){
-	ios::sync_with_stdio ( false );
-	cin.tie ( 0 );
-	cout.tie ( 0 );
+    ios::sync_with_stdio ( false );
+    cin.tie ( 0 );
+    cout.tie ( 0 );
 
-	int n, m, l, r, in, type;
-	cin >> n >> m;
-	build ( 1, n, seg );
-	for ( int i = 1 ; i <= n ; i++ ){
-		cin >> in;
-		update ( 1, n, i, in, seg );
-	}
+    int n, m, l, r, in, type;
+    cin >> n >> m;
+    build ( 1, n, seg );
+    for ( int i = 1 ; i <= n ; i++ ){
+        cin >> in;
+        update ( 1, n, i, in, seg );
+    }
 
-	// type 1: 單點修改
-	// type 2: 區間查詢最大值
-	while ( m-- ){
-		cin >> type;
-		if ( type == 1 ){
-			cin >> l >> in;
-			update ( 1, n, l, in, seg );
-		}
-		else if ( type == 2 ){
-			cin >> l >> r;
-			cout << query ( l, r, 1, n, seg ) << '\n';
-		}
-	}
+    // type 1: 單點修改
+    // type 2: 區間查詢最大值
+    while ( m-- ){
+        cin >> type;
+        if ( type == 1 ){
+            cin >> l >> in;
+            update ( 1, n, l, in, seg );
+        }
+        else if ( type == 2 ){
+            cin >> l >> r;
+            cout << query ( l, r, 1, n, seg ) << '\n';
+        }
+    }
 }
 ```
 
@@ -156,99 +156,99 @@ int main(){
 using namespace std;
 
 struct node{
-	node *l, *r;
-	int value;
+    node *l, *r;
+    int value;
 
-	node ( int _val ): l ( nullptr ), r ( nullptr ), value ( _val ) {}
-	// 新增一個建構子，可以直接複製原本的 l, r
-	node ( node *o ): l ( o -> l ), r ( o -> r ), value ( o -> value ) {}
+    node ( int _val ): l ( nullptr ), r ( nullptr ), value ( _val ) {}
+    // 新增一個建構子，可以直接複製原本的 l, r
+    node ( node *o ): l ( o -> l ), r ( o -> r ), value ( o -> value ) {}
 
-	inline void up ( void ){
-		value = -1;
-		if ( l )
-			value = max ( value, l -> value );
-		if ( r )
-			value = max ( value, r -> value );
-	}
+    inline void up ( void ){
+        value = -1;
+        if ( l )
+            value = max ( value, l -> value );
+        if ( r )
+            value = max ( value, r -> value );
+    }
 } *seg = nullptr;
 
 void build ( int l, int r, node *&o ){
-	o = new node ( 0 );
-	if ( l == r )
-		return;
-	int mid = ( l + r ) >> 1;
-	build ( l, mid, o -> l );
-	build ( mid + 1, r, o -> r );
+    o = new node ( 0 );
+    if ( l == r )
+        return;
+    int mid = ( l + r ) >> 1;
+    build ( l, mid, o -> l );
+    build ( mid + 1, r, o -> r );
 
-	o -> up();
+    o -> up();
 }
 
 void update ( int l, int r, int index, int value, node *&o ){
-	// 把需要修改的節點在修改前先開一個新位置出來
-	o = new node ( o );
-	if ( l == r )
-		o -> value = value;
-	else{
-		int mid = ( l + r ) >> 1;
-		if ( index <= mid )
-			update ( l, mid, index, value, o -> l );
-		else
-			update ( mid + 1, r, index, value, o -> r );
+    // 把需要修改的節點在修改前先開一個新位置出來
+    o = new node ( o );
+    if ( l == r )
+        o -> value = value;
+    else{
+        int mid = ( l + r ) >> 1;
+        if ( index <= mid )
+            update ( l, mid, index, value, o -> l );
+        else
+            update ( mid + 1, r, index, value, o -> r );
 
-		o -> up();
-	}
+        o -> up();
+    }
 }
 
 int query ( int l, int r, int nowL, int nowR, node *o ){
-	if ( l <= nowR && nowR <= r )
-		return o -> value;
-	int mid = ( nowL + nowR ) >> 1;
-	if ( r <= mid )
-		return query ( l, r, nowL, mid, o -> l );
-	if ( mid < l )
-		return query ( l, r, mid + 1, nowR, o -> r );
+    if ( l <= nowR && nowR <= r )
+        return o -> value;
+    int mid = ( nowL + nowR ) >> 1;
+    if ( r <= mid )
+        return query ( l, r, nowL, mid, o -> l );
+    if ( mid < l )
+        return query ( l, r, mid + 1, nowR, o -> r );
 
-	return max ( query ( l, r, nowL, mid, o -> l ), query ( l, r, mid + 1, nowR, o -> r ) );
+    return max ( query ( l, r, nowL, mid, o -> l ), query ( l, r, mid + 1, nowR, o -> r ) );
 }
 
 int main(){
-	ios::sync_with_stdio ( false );
-	cin.tie ( 0 );
-	cout.tie ( 0 );
+    ios::sync_with_stdio ( false );
+    cin.tie ( 0 );
+    cout.tie ( 0 );
 
-	int n, m, l, r, in, type;
+    int n, m, l, r, in, type;
     // 紀錄版本用的 vector
-	vector < node* > version;
-	cin >> n >> m;
-	build ( 1, n, seg );
-	for ( int i = 1 ; i <= n ; i++ ){
-		cin >> in;
-		update ( 1, n, i, in, seg );
-	}
-	// 記錄初始版本
-	version.push_back ( seg );
+    vector < node* > version;
+    cin >> n >> m;
+    build ( 1, n, seg );
+    for ( int i = 1 ; i <= n ; i++ ){
+        cin >> in;
+        update ( 1, n, i, in, seg );
+    }
+    // 記錄初始版本
+    version.push_back ( seg );
 
-	// type 1: 單點修改
-	// type 2: 區間查詢最大值
-	// type 3: 回朔到版本 k
-	while ( m-- ){
-		cin >> type;
-		if ( type == 1 ){
-			cin >> l >> in;
-			update ( 1, n, l, in, seg );
-			// 修改完紀錄版本
-			version.push_back ( seg );
-		}
-		else if ( type == 2 ){
-			cin >> l >> r;
-			cout << query ( l, r, 1, n, seg ) << '\n';
-		}
-		else{
-			// 回朔到版本 k
-			cin >> in;
-			seg = version[in];
-		}
-	}
+    // type 1: 單點修改
+    // type 2: 區間查詢最大值
+    // type 3: 回朔到版本 k
+    while ( m-- ){
+        cin >> type;
+        if ( type == 1 ){
+            cin >> l >> in;
+            update ( 1, n, l, in, seg );
+            // 修改完紀錄版本
+            version.push_back ( seg );
+        }
+        else if ( type == 2 ){
+            cin >> l >> r;
+            cout << query ( l, r, 1, n, seg ) << '\n';
+        }
+        else{
+            // 回朔到版本 k
+            cin >> in;
+            seg = version[in];
+        }
+    }
 }
 ```
 
@@ -293,17 +293,17 @@ Emmm，但是感覺好像怪怪的
 
 ```cpp
 struct piece{
-	int l, r, sz;
+    int l, r, sz;
 
-	// 檢查兩個 piece 是否相同
-	bool operator == ( const piece b ){
-		return l == b.l && r == b.r;
-	}
+    // 檢查兩個 piece 是否相同
+    bool operator == ( const piece b ){
+        return l == b.l && r == b.r;
+    }
 };
 
 // 不想寫 operator（或是覺得太麻煩）可以這樣寫
 inline bool same ( piece a, piece b ){
-	return a.l == b.l && a.r == b.r;
+    return a.l == b.l && a.r == b.r;
 }
 ```
 
@@ -330,20 +330,20 @@ $ma$ 則是記錄當前線段樹區間內，最長的好序列長度
 ```cpp
 inline node merge ( node L, node R ){
     node res;
-	res.front = L.front, res.back = R.back, res.ma = ( L.ma.sz > R.ma.sz ? L.ma : R.ma );
+    res.front = L.front, res.back = R.back, res.ma = ( L.ma.sz > R.ma.sz ? L.ma : R.ma );
 
-	if ( basic[L.back.r] + 1 == basic[R.front.l] ){
-		piece swp = piece { L.back.l, R.front.r, R.front.r - L.back.l + 1 };
+    if ( basic[L.back.r] + 1 == basic[R.front.l] ){
+        piece swp = piece { L.back.l, R.front.r, R.front.r - L.back.l + 1 };
 
-		if ( L.front == L.back )
-			res.front = swp;
-		if ( R.front == R.back )
-			res.back = swp;
+        if ( L.front == L.back )
+            res.front = swp;
+        if ( R.front == R.back )
+            res.back = swp;
 
-		res.ma = ( swp.sz > res.ma.sz ? swp : res.ma );
-	}
+        res.ma = ( swp.sz > res.ma.sz ? swp : res.ma );
+    }
 
-	return res;
+    return res;
 }
 ```
 
@@ -368,91 +368,91 @@ using namespace std;
 #define maxN 100005
 
 struct piece{
-	int l, r, sz;
+    int l, r, sz;
 
-	// 檢查兩個 piece 是否相同
-	bool operator == ( const piece b ){
-		return l == b.l && r == b.r;
-	}
+    // 檢查兩個 piece 是否相同
+    bool operator == ( const piece b ){
+        return l == b.l && r == b.r;
+    }
 };
 
 // 不想寫 operator（或是覺得太麻煩）可以這樣寫
 inline bool same ( piece a, piece b ){
-	return a.l == b.l && a.r == b.r;
+    return a.l == b.l && a.r == b.r;
 }
 
 struct node{
-	piece front, back, ma;
+    piece front, back, ma;
 } seg[maxN << 2];
 
 int basic[maxN];
 
 inline node merge ( node L, node R ){
     node res;
-	res.front = L.front, res.back = R.back, res.ma = ( L.ma.sz > R.ma.sz ? L.ma : R.ma );
+    res.front = L.front, res.back = R.back, res.ma = ( L.ma.sz > R.ma.sz ? L.ma : R.ma );
 
-	if ( basic[L.back.r] + 1 == basic[R.front.l] ){
-		piece swp = piece { L.back.l, R.front.r, R.front.r - L.back.l + 1 };
+    if ( basic[L.back.r] + 1 == basic[R.front.l] ){
+        piece swp = piece { L.back.l, R.front.r, R.front.r - L.back.l + 1 };
 
-		if ( L.front == L.back )
-			res.front = swp;
-		if ( R.front == R.back )
-			res.back = swp;
+        if ( L.front == L.back )
+            res.front = swp;
+        if ( R.front == R.back )
+            res.back = swp;
 
-		res.ma = ( swp.sz > res.ma.sz ? swp : res.ma );
-	}
+        res.ma = ( swp.sz > res.ma.sz ? swp : res.ma );
+    }
 
-	return res;
+    return res;
 }
 
 void update ( int l, int r, int index, int value, int n ){
-	if ( l == r )
-		seg[n].front = seg[n].back = seg[n].ma = piece { l, l, 1 };
-	else{
-		int mid = ( l + r ) >> 1, leftSon = n << 1, rightSon = leftSon | 1;
-		if ( index <= mid )
-			update ( l, mid, index, value, leftSon );
-		else
-			update ( mid + 1, r, index, value, rightSon );
+    if ( l == r )
+        seg[n].front = seg[n].back = seg[n].ma = piece { l, l, 1 };
+    else{
+        int mid = ( l + r ) >> 1, leftSon = n << 1, rightSon = leftSon | 1;
+        if ( index <= mid )
+            update ( l, mid, index, value, leftSon );
+        else
+            update ( mid + 1, r, index, value, rightSon );
 
-		seg[n] = merge ( seg[leftSon], seg[rightSon] );
-	}
+        seg[n] = merge ( seg[leftSon], seg[rightSon] );
+    }
 }
 
 node query ( int l, int r, int nowL, int nowR, int n ){
-	if ( l <= nowL && nowR <= r )
-		return seg[n];
-	int mid = ( nowL + nowR ) >> 1, leftSon = n << 1, rightSon = leftSon | 1;
-	if ( r <= mid )
-		return query ( l, r, nowL, mid, leftSon );
-	if ( mid < l )
-		return query ( l, r, mid + 1, nowR, rightSon );
+    if ( l <= nowL && nowR <= r )
+        return seg[n];
+    int mid = ( nowL + nowR ) >> 1, leftSon = n << 1, rightSon = leftSon | 1;
+    if ( r <= mid )
+        return query ( l, r, nowL, mid, leftSon );
+    if ( mid < l )
+        return query ( l, r, mid + 1, nowR, rightSon );
 
-	return merge ( query ( l, r, nowL, mid, leftSon ), query ( l, r, mid + 1, nowR, rightSon ) );
+    return merge ( query ( l, r, nowL, mid, leftSon ), query ( l, r, mid + 1, nowR, rightSon ) );
 }
 
 int main(){
-	ios::sync_with_stdio ( false );
-	cin.tie ( 0 );
-	cout.tie ( 0 );
+    ios::sync_with_stdio ( false );
+    cin.tie ( 0 );
+    cout.tie ( 0 );
 
-	int n, m, type, l, r;
-	cin >> n;
-	for ( int i = 1 ; i <= n ; i++ ){
-		cin >> basic[i];
-		update ( 1, n, i, basic[i], 1 );
-	}
+    int n, m, type, l, r;
+    cin >> n;
+    for ( int i = 1 ; i <= n ; i++ ){
+        cin >> basic[i];
+        update ( 1, n, i, basic[i], 1 );
+    }
 
-	cin >> m;
-	while ( m-- ){
-		cin >> type >> l >> r;
-		if ( type == 1 ){
-			basic[l] = r;
-			update ( 1, n, l, r, 1 );
-		}
-		else
-			cout << query ( l, r, 1, n, 1 ).ma.sz << '\n';
-	}
+    cin >> m;
+    while ( m-- ){
+        cin >> type >> l >> r;
+        if ( type == 1 ){
+            basic[l] = r;
+            update ( 1, n, l, r, 1 );
+        }
+        else
+            cout << query ( l, r, 1, n, 1 ).ma.sz << '\n';
+    }
 }
 ```
 
@@ -475,18 +475,18 @@ int main(){
 int BIT[maxN][maxN], n = 100, m = 100;
 
 inline void add ( int x, int y, int in ){
-	for ( int i = x ; i <= n ; i += i & -i )
-		for ( int j = y ; j <= m ; j += j & -j )
-			BIT[i][j] += in;
+    for ( int i = x ; i <= n ; i += i & -i )
+        for ( int j = y ; j <= m ; j += j & -j )
+            BIT[i][j] += in;
 }
 
 inline int sum ( int x, int y, int in ){
-	int res = 0;
-	for ( int i = x ; i ; i -= i & -i )
-		for ( int j = y ; j ; j -= j & -j )
-			res += BIT[i][j];
+    int res = 0;
+    for ( int i = x ; i ; i -= i & -i )
+        for ( int j = y ; j ; j -= j & -j )
+            res += BIT[i][j];
 
-	return res;
+    return res;
 }
 ```
 
@@ -506,6 +506,17 @@ inline int sum ( int x, int y, int in ){
 而動態開點因為找不大到適合的題目，找到的題目後來想想可以用線段樹 + 離散化炸掉
 雖然說用動態開點比較無腦，但是好像非必要，有興趣寫的人可以看這一題 [TOJ 242 G. 色彩繽紛](https://toj.tfcis.org/oj/pro/242/)
 
-至於資料結構的例題講解，這邊的 blog 有幾篇，可以去 tag 那邊找 #segment Tree
+至於資料結構的例題講解，這邊的 blog 有幾篇
+
+1. [[CF][920F] F. SUM AND REPLACE](https://miohitokiri5474.github.io/code/CF-920F/)
+    這邊挺久之前寫的，可能語句有些不順
+2. [[TOJ][391] E. 模數 CANDY](https://miohitokiri5474.github.io/code/TOJ-391/)
+    這篇也挺久的，是高中時打過的比賽
+3. [[TIOJ][1909] 勇者出征](https://miohitokiri5474.github.io/code/TIOJ-1909/)
+    高中時寫到的哏題，也是離散化套線段樹
+    不過當時還有用噁心 define 的毒瘤習慣，code 看起來可能有些痛苦
+4. [[TOJ][365]G.大龍貓](https://miohitokiri5474.github.io/code/TOJ-365/)
+    最後是在文中有用到的題目大龍貓，當初也有寫一份題解
+    不過個人認為這邊的更好閱讀
 
 最後感謝閱讀到這邊的各位，謝謝大家
