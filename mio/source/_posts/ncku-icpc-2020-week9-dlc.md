@@ -456,29 +456,56 @@ int main(){
 }
 ```
 
-### 動態開點線段樹
+## BIT Extra - 2維BIT
 
-#### 已經成習慣的先看題目
+#### 已經成習慣的先看個題目
 
->給定一條長度為 $N$、元素皆為 0 的序列，並且有 $M$ 筆操作，操作內容如下
+> 給定一平面，每個點都有權重，求查詢 $( x_1, y_1 ), ( x_2, y_2 )$ 所圍成區間的權重和，並且支援單點修改
 >
->1. 將區間 $[l, r]$ 的元素都改為 $0$
->2. 將區間 $[l, r]$ 的元素都改為 $1$
->3. 查詢區間 $[l, r]$ 之間，共有幾個團
->
->定義團：相鄰的元素皆為 $1$ 的區間
->
->$N \le 10^9, M \le 10^5, 0 \le l, r \le N$
->
->原題目為 TOJ 242 G. 色彩繽紛，原題目網址在[這裡](https://toj.tfcis.org/oj/pro/242/)
+> $N, M \le 10^4, Q \le 10^5$
 
-看到區間第一個想到的是線段樹
-再看一下範圍，$10^9$ 會爆炸，線段樹開不下去
+暴力一定炸，那麼開 $N$ 顆線段樹 or BIT？
 
-但是如果一整個區間都沒有變
+也不是不行，只是這樣可能還是會 TLE （複雜度 $O(QN\log M)$ ）
+
+那麼就寫個二維 BIT 吧
+概念上跟 BIT 一樣，另外需要做修改的行數跟一維 BIT 一樣
+
+```cpp
+int BIT[maxN][maxN], n = 100, m = 100;
+
+inline void add ( int x, int y, int in ){
+	for ( int i = x ; i <= n ; i += i & -i )
+		for ( int j = y ; j <= m ; j += j & -j )
+			BIT[i][j] += in;
+}
+
+inline int sum ( int x, int y, int in ){
+	int res = 0;
+	for ( int i = x ; i ; i -= i & -i )
+		for ( int j = y ; j ; j -= j & -j )
+			res += BIT[i][j];
+
+	return res;
+}
+```
+
+
 
 ## 後記
 
-這篇文章寫的也挺久的，主要是文中的內容大部分都不常用到，在寫的時候還跑去翻了一些文章
+這篇文章寫的也挺久的，主要是文中的內容大部分都不常用到，在寫的時候還跑去翻了一些文章以及教材
 
-正因如此，內容上可能有些錯誤，如有發現，請聯絡 [筆者](https://miohitokiri5474.github.io/code/about/)
+正因如此，內容上可能有些錯誤
+如有發現錯誤，請聯絡 [筆者](https://miohitokiri5474.github.io/code/about/)
+
+另外，這篇文章中的 code 也有同步更新於筆者的 github，可以看[這邊](https://github.com/MiohitoKiri5474/CodesBackUp/tree/master/ncku-icpc/2020/week9/DLC)
+
+本來還有預計要寫 Treap & 動態開點
+ Treap 寫起來太耗費時間，就先欠著吧（？
+而動態開點因為找不大到適合的題目，找到的題目後來想想可以用線段樹 + 離散化炸掉
+雖然說用動態開點比較無腦，但是好像非必要，有興趣寫的人可以看這一題 [TOJ 242 G. 色彩繽紛](https://toj.tfcis.org/oj/pro/242/)
+
+至於資料結構的例題講解，這邊的 blog 有幾篇，可以
+
+最後感謝閱讀到這邊的各位，謝謝大家
