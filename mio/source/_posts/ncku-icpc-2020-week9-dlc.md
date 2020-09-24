@@ -465,6 +465,35 @@ int main(){
 
 暴力一定炸，那麼開 $N$ 顆線段樹 or BIT？
 
+```cpp
+int bit[maxN][maxN], n, m;
+
+inline void add ( int x, int y, int value ){
+    while ( y <= m ){
+        bit[x][y] += value;
+        y += y * -y;
+    }
+}
+
+inline int sum ( int x, int y ){
+    int res = 0;
+    while ( y ){
+        res += bit[x][y];
+        y -= y * -y;
+    }
+
+    return res;
+}
+
+inline int query ( int x1, int y1, int x2, int y2 ){
+    int res = 0;
+    for ( int i = x1 ; i <= x2 ; i++ )
+        res += sum ( i, y2 ) - sum ( i, y1 );
+
+    return res;
+}
+```
+
 也不是不行，只是這樣可能還是會 TLE （複雜度 $O(QN\log M)$ ）
 
 那麼就寫個二維 BIT 吧
