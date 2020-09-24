@@ -79,7 +79,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: http://github.com/Miohitokiri5474/Miohitokiri.github.io.git
+  repository: https://github.com/MiohitoKiri5474/code.git
   branch: master
 
 symbols_count_time:
