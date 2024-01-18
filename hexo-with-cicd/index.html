@@ -1,0 +1,325 @@
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta name="google-site-verification" content="m9sOVJZxIJPa9f7LP6pLEnLhZjHBWpXH9gPv4Vh2vOM"><script src="/code/lib/pace/pace.min.js?v=1.0.2"></script><link href="/code/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="google-site-verification" content="m9sOVJZxIJPa9f7LP6pLEnLhZjHBWpXH9gPv4Vh2vOM"><link href="/code/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/code/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/code/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/code/images/logo.jpg?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/code/images/logo.jpg?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/code/images/logo.jpg?v=5.1.4"><meta name="keywords" content="CI/CD,Hexo,"><link rel="alternate" href="/code/atom.xml" title="Coder MiohitoKiri" type="application/atom+xml"><meta name="description" content="前言最近在研究關於 CI&#x2F;CD 的操作，突然想到自己也會把 blog 的 source 等等推上 git既然如此，就來研究一下要怎麼使用 CI&#x2F;CD 自動化部署 Hexo 好了，順便練一下 CI&#x2F;CD 的使用另外順便提一下，大概在這一兩年，GitHub Pages 也將網站更新做成 CI&#x2F;CD 的自動化部署了我也是在做完 source repo 的 CI&#x2F;CD 才注意到這件事"><meta property="og:type" content="article"><meta property="og:title" content="使用 CI&#x2F;CD 自動部署 Hexo"><meta property="og:url" content="https://miohitokiri5474.github.io/code/hexo-with-cicd/index.html"><meta property="og:site_name" content="Coder MiohitoKiri"><meta property="og:description" content="前言最近在研究關於 CI&#x2F;CD 的操作，突然想到自己也會把 blog 的 source 等等推上 git既然如此，就來研究一下要怎麼使用 CI&#x2F;CD 自動化部署 Hexo 好了，順便練一下 CI&#x2F;CD 的使用另外順便提一下，大概在這一兩年，GitHub Pages 也將網站更新做成 CI&#x2F;CD 的自動化部署了我也是在做完 source repo 的 CI&#x2F;CD 才注意到這件事"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://miohitokiri5474.github.io/code/hexo-with-cicd/hexo-cicd-result.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/hexo-with-cicd/pub_key.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/hexo-with-cicd/sec_key.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/hexo-with-cicd/action-default.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/hexo-with-cicd/cicd-running.png"><meta property="article:published_time" content="2023-07-22T17:30:58.000Z"><meta property="article:modified_time" content="2024-01-18T08:14:27.586Z"><meta property="article:author" content="MiohitoKiri5474"><meta property="article:tag" content="CI&#x2F;CD"><meta property="article:tag" content="Hexo"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://miohitokiri5474.github.io/code/hexo-with-cicd/hexo-cicd-result.png"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/code/",scheme:"Pisces",version:"5.1.4",sidebar:{position:"left",display:"always",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"Author"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://miohitokiri5474.github.io/code/hexo-with-cicd/"><title>使用 CI/CD 自動部署 Hexo | Coder MiohitoKiri</title><script>!function(e,a,t,n,g,c){e.GoogleAnalyticsObject=n,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=+new Date,g=a.createElement(t),c=a.getElementsByTagName(t)[0],g.async=1,g.src="https://www.google-analytics.com/analytics.js",c.parentNode.insertBefore(g,c)}(window,document,"script","ga"),ga("create","UA-151767837-1","auto"),ga("send","pageview")</script><meta name="generator" content="Hexo 4.2.1"></head><body itemscope itemtype="http://schema.org/WebPage" lang="en"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/code/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Coder MiohitoKiri</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/code/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>Home</a></li><li class="menu-item menu-item-about"><a href="/code/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>About</a></li><li class="menu-item menu-item-tags"><a href="/code/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>Tags</a></li><li class="menu-item menu-item-archives"><a href="/code/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>Archives</a></li><li class="menu-item menu-item-main-page"><a href="https://miohitokiri5474.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-flag"></i><br>Main Page</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://miohitokiri5474.github.io/code/code/hexo-with-cicd/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="MiohitoKiri5474"><meta itemprop="description" content><meta itemprop="image" content="/code/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Coder MiohitoKiri"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">使用 CI/CD 自動部署 Hexo</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-07-23T01:30:58+08:00">2023-07-23</time></span></div></header><div class="post-body" itemprop="articleBody"><img src="/code/hexo-with-cicd/hexo-cicd-result.png" title="另一個 blog 文章的自動推送結果"><h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2><p>最近在研究關於 CI/CD 的操作，突然想到自己也會把 blog 的 source 等等推上 git<br>既然如此，就來研究一下要怎麼使用 CI/CD 自動化部署 Hexo 好了，順便練一下 CI/CD 的使用</p><p>另外順便提一下，大概在這一兩年，GitHub Pages 也將網站更新做成 CI/CD 的自動化部署了<br>我也是在做完 source repo 的 CI/CD 才注意到這件事</p><a id="more"></a><blockquote><p>雖然在寫 Hexo 文章前就來寫自動化部署有點怪，但是 Hexo 相關的文章好長不想寫QQ</p></blockquote><h2 id="CI-CD-是什麼"><a class="header-anchor" href="#CI-CD-是什麼"></a>CI/CD 是什麼</h2><p>在講解 CI/CD 之前，先來簡單了解 DevOps</p><p>通常開發（Development）與維運（Operations）之間會因為立場不同造成意見上的衝突<br>而 DevOps 的概念辨識為了讓整體開發工作能夠同時堅固速度與品質，所產生的一套自動化方式<br>CI/CD 工具也是為了此概念而產生的，透過兩邊人員的溝通以及合作，將測試以及部署的流程自動化<br>使得開發人員在開發階段便能偵測到問題，並且在通過測試後直接部署到伺服器上</p><p>說回 CI/CD，CI/CD 是由兩部分組成的：<code>持續整合 Continuous Integration</code> 以及 <code>持續部署 Continuous Deployment</code><br>顧名思義，持續整合（Continuous Integration, CI）即是當開發人員完成一個階段性的程式碼後，便交由自動化工具測試、偵錯，並且建置出即將部署的版本<br>而持續部署（Continuous Deployment, CD）則是 CI 的下個階段，在當前程式碼版本經過 CI 的驗證以及建構後，再藉由 CD 工具部署上伺服器</p><h2 id="GitHub-Action"><a class="header-anchor" href="#GitHub-Action"></a>GitHub Action</h2><p>市面上常見的 CI/CD 工具有以下幾種</p><ol><li>GitHub Action<br>由 Git Server 網站 GitHub 提供的 CI/CD 服務，與 GitHub 本身整合能夠輕鬆的達成版控以及自動化部署</li><li>GitLab CI/CD Pipeline<br>由同為 Git Server 的 GitLab 提供的 CI/CD 工具，也是與 GitLab 自身整合，輕鬆達成版控和自動化佈署</li><li>Anthos<br>Anthos 是由 Google 提供的工具，其特點是能迅速的部署混合雲架構和跨雲管理平台<br>若是有許多雲平台需要維護，可使用 Anthos 減少於不同平台 deploy 時所需要的調整</li></ol><p>因為我的 source repo 以及網站分別放在 GitHub 以及 GitHub Pages 上，這邊我是選擇使用 GitHub Action 作為我的 CI/CD 工具</p><blockquote><p>我知道 source 以及 GitHub Pages 可以放在同一個 repo 不同 branch 中，不過寫 blog 的這幾年中都是分開放，用到現在也習慣了有點懶得改 blog 的 config，所以這邊都還是放在不同的 repo 中</p></blockquote><h2 id="設定-CI-CD"><a class="header-anchor" href="#設定-CI-CD"></a>設定 CI/CD</h2><h3 id="準備-ssh-key"><a class="header-anchor" href="#準備-ssh-key"></a>準備 ssh key</h3><p>我們的網站在 deploy 時，會將資料 push 上 GitHub Pages 所在的 repo 上，而現在 GitHub 不開放使用 http remote<br>而且你也不想把 GitHub 帳密直接存在 repo 中，也不能每次跑 CI/CD 都敲一次密碼（這樣我們做 CI/CD 就沒意義了XD<br>因此這邊要改成用 ssh remote，同時準備一組 ssh key 讓他們之間可以連線</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"&lt;your email&gt;"</span> -f deploy</span><br></pre></td></tr></table></figure><p>Enter passpharase 留空跳過就好</p><p>之後就會產生兩個檔案 <code>deploy.pub</code> 以及 <code>deploy</code>，分別為公鑰以及私鑰</p><h3 id="將-ssh-key-放上-GitHub"><a class="header-anchor" href="#將-ssh-key-放上-GitHub"></a>將 ssh key 放上 GitHub</h3><p>首先我們先將 GitHub Pages 的 repo 放上公鑰<br>路徑如下：Settings &gt; Deploy keys &gt; Add deploy key<br>Title 留你喜歡的就好<br>Key 的部分就是把公鑰 deploy.pub 裡面的內容貼過來<br>記得下面的 <code>Allow write access</code> 要打勾，不然等等 Hexo 要 push 網站進來時會吃到 permission denied</p><img src="/code/hexo-with-cicd/pub_key.png" title="這裡放公鑰，下面記得打勾"><p>然後再去 source repo 放私鑰<br>路徑如下：Settings &gt; Secrets and variables &gt; Actions &gt; New repository secret<br>Name 的部分也是留喜歡的就好，這邊是以目前這個網站（Coder MiohitoKiri）為範例，所以留 <code>CODE_SEC</code><br>Secret 也是把私鑰 deploy 貼上來</p><img src="/code/hexo-with-cicd/sec_key.png" title="這裡放私鑰"><h3 id="設定-GitHub-Action"><a class="header-anchor" href="#設定-GitHub-Action"></a>設定 GitHub Action</h3><img src="/code/hexo-with-cicd/action-default.png" title="設定自己的 GitHub Action"><p>到 source repo 那邊點 Actions，並且點下面的 set up a workflow yourself</p><p>然後這邊是我的 CI/CD 設定，可以直接複製貼上<br>不過要注意最後一行的 <code>CODE-SEC</code> 要替換成你設定的私鑰名稱，以及第二大項的觸發條件，要改成你的 branch 名稱</p><blockquote><p>因為我兩個 blog source 是放在同一個 repo 不同 branch，有不同的設定，兩個網站的 CI/CD 沒有寫在一起<br>有空再來把他們整合起來</p></blockquote><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Auto</span> <span class="string">Deploy</span> <span class="string">to</span> <span class="string">GitHub</span> <span class="string">Pages</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span> <span class="string">[</span> <span class="string">"mio"</span> <span class="string">]</span></span><br><span class="line">  <span class="attr">pull_request:</span></span><br><span class="line">    <span class="attr">branches:</span> <span class="string">[</span> <span class="string">"mio"</span> <span class="string">]</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Set</span> <span class="string">Time</span> <span class="string">Zone</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">sudo</span> <span class="string">timedatectl</span> <span class="string">set-timezone</span> <span class="string">'Asia/Taipei'</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Add</span> <span class="string">GitHub</span> <span class="string">into</span> <span class="string">ssh_known</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">mkdir</span> <span class="string">-p</span> <span class="string">~/.ssh</span></span><br><span class="line">          <span class="string">ssh-keyscan</span> <span class="string">github.com</span> <span class="string">&gt;&gt;</span> <span class="string">~/.ssh/known_hosts</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Node.js</span> <span class="string">Setup</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">"13.0.0"</span></span><br><span class="line">          <span class="attr">cache:</span> <span class="string">'npm'</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Node.js</span> <span class="string">Package</span> <span class="string">install</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">i</span> <span class="string">-g</span> <span class="string">hexo-cli</span> <span class="string">&amp;&amp;</span> <span class="string">npm</span> <span class="string">i</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">sma11black/hexo-action@v1.0.3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">deploy_key:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.CODE_SEC</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure><p>簡單講解一下步驟：</p><ol><li>將專案 checkout 下來</li><li>設定 Timezone<br>這些流程都會在 container 上執行，而這些 container 都在國外，為了避免文章日期因為時差跑掉跑掉，這邊把 time zone 設定回 Asia/Taipei</li><li>將 ssh key 加入目前這個 container 中</li><li>設定 Node.js 環境<br>我的套件都還沒更新上去（每次更新都多一堆坑要補，後來懶了就都不更新了），所以這邊要將 Node.js 的版本設定回 13.0.0</li><li>安裝套件</li><li>部署網站<br>網站這邊我是用別人寫好的 action 腳本，只要提供私鑰給他就好了</li></ol><img src="/code/hexo-with-cicd/cicd-running.png" title="CI&#x2F;CD is running..."><p>然後就是把文章 push 上去，觸發 CI/CD 看他執行啦</p></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author:</strong> MiohitoKiri5474</li><li class="post-copyright-link"><strong>Post link:</strong> <a href="https://miohitokiri5474.github.io/code/hexo-with-cicd/" title="使用 CI/CD 自動部署 Hexo">https://miohitokiri5474.github.io/code/hexo-with-cicd/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/code/tags/CI-CD/" rel="tag"># CI/CD</a> <a href="/code/tags/Hexo/" rel="tag"># Hexo</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/code/terminalSetUp/" rel="next" title="個人環境建置：iTerm 2 + zsh + neoVim"><i class="fa fa-chevron-left"></i> 個人環境建置：iTerm 2 + zsh + neoVim</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/code/APCS-23-10/" rel="prev" title="[APCS] 2023年十月場實作題詳解">[APCS] 2023年十月場實作題詳解 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">Table of Contents</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">Overview</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/code/images/avatar.jpg" alt="MiohitoKiri5474"><p class="site-author-name" itemprop="name">MiohitoKiri5474</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/code/archives/%7C%7C%20archive"><span class="site-state-item-count">24</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-tags"><a href="/code/tags/index.html"><span class="site-state-item-count">31</span> <span class="site-state-item-name">tags</span></a></div></nav><div class="feed-link motion-element"><a href="/code/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/miohitokiri5474" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-globe"></i>GitHub</a> </span><span class="links-of-author-item"><a href="https://www.facebook.com/miohitokiri5474" target="_blank" title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-globe"></i>Facebook</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CI-CD-是什麼"><span class="nav-number">2.</span> <span class="nav-text">CI&#x2F;CD 是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub-Action"><span class="nav-number">3.</span> <span class="nav-text">GitHub Action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#設定-CI-CD"><span class="nav-number">4.</span> <span class="nav-text">設定 CI&#x2F;CD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#準備-ssh-key"><span class="nav-number">4.1.</span> <span class="nav-text">準備 ssh key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#將-ssh-key-放上-GitHub"><span class="nav-number">4.2.</span> <span class="nav-text">將 ssh key 放上 GitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-GitHub-Action"><span class="nav-number">4.3.</span> <span class="nav-text">設定 GitHub Action</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2024</span> <span class="with-love"><i class="fa fa-"></i> </span><span class="author" itemprop="copyrightHolder">MiohitoKiri5474</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/code/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/code/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/code/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/code/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/code/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/code/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/code/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/code/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/javascript" src="/code/js/src/exturl.js?v=5.1.4"></script></body></html>

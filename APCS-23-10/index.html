@@ -1,0 +1,325 @@
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta name="google-site-verification" content="m9sOVJZxIJPa9f7LP6pLEnLhZjHBWpXH9gPv4Vh2vOM"><script src="/code/lib/pace/pace.min.js?v=1.0.2"></script><link href="/code/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="google-site-verification" content="m9sOVJZxIJPa9f7LP6pLEnLhZjHBWpXH9gPv4Vh2vOM"><link href="/code/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/code/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/code/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/code/images/logo.jpg?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/code/images/logo.jpg?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/code/images/logo.jpg?v=5.1.4"><meta name="keywords" content="APCS,Full Contest Solution,"><link rel="alternate" href="/code/atom.xml" title="Coder MiohitoKiri" type="application/atom+xml"><meta name="description" content="前言久違的寫一下題解，最近因為家教的學生有去考所以最近來寫一下題目因為沒有實際去考，也沒有實際的成績，這邊的測試都是丟到 ZJ 上面的題目"><meta property="og:type" content="article"><meta property="og:title" content="[APCS] 2023年十月場實作題詳解"><meta property="og:url" content="https://miohitokiri5474.github.io/code/APCS-23-10/index.html"><meta property="og:site_name" content="Coder MiohitoKiri"><meta property="og:description" content="前言久違的寫一下題解，最近因為家教的學生有去考所以最近來寫一下題目因為沒有實際去考，也沒有實際的成績，這邊的測試都是丟到 ZJ 上面的題目"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2023-10-26T06:12:23.000Z"><meta property="article:modified_time" content="2024-01-18T08:14:27.582Z"><meta property="article:author" content="MiohitoKiri5474"><meta property="article:tag" content="APCS"><meta property="article:tag" content="Full Contest Solution"><meta name="twitter:card" content="summary"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/code/",scheme:"Pisces",version:"5.1.4",sidebar:{position:"left",display:"always",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"Author"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://miohitokiri5474.github.io/code/APCS-23-10/"><title>[APCS] 2023年十月場實作題詳解 | Coder MiohitoKiri</title><script>!function(e,a,t,n,g,c){e.GoogleAnalyticsObject=n,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=+new Date,g=a.createElement(t),c=a.getElementsByTagName(t)[0],g.async=1,g.src="https://www.google-analytics.com/analytics.js",c.parentNode.insertBefore(g,c)}(window,document,"script","ga"),ga("create","UA-151767837-1","auto"),ga("send","pageview")</script><meta name="generator" content="Hexo 4.2.1"></head><body itemscope itemtype="http://schema.org/WebPage" lang="en"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/code/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Coder MiohitoKiri</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/code/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>Home</a></li><li class="menu-item menu-item-about"><a href="/code/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>About</a></li><li class="menu-item menu-item-tags"><a href="/code/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>Tags</a></li><li class="menu-item menu-item-archives"><a href="/code/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>Archives</a></li><li class="menu-item menu-item-main-page"><a href="https://miohitokiri5474.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-flag"></i><br>Main Page</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://miohitokiri5474.github.io/code/code/APCS-23-10/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="MiohitoKiri5474"><meta itemprop="description" content><meta itemprop="image" content="/code/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Coder MiohitoKiri"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">[APCS] 2023年十月場實作題詳解</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-10-26T14:12:23+08:00">2023-10-26</time></span></div></header><div class="post-body" itemprop="articleBody"><h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2><p>久違的寫一下題解，最近因為家教的學生有去考所以最近來寫一下題目<br>因為沒有實際去考，也沒有實際的成績，這邊的測試都是丟到 ZJ 上面的題目</p><a id="more"></a><h2 id="Problem-1-機械鼠"><a class="header-anchor" href="#Problem-1-機械鼠"></a>Problem 1: 機械鼠</h2><p><a href="https://zerojudge.tw/ShowProblem?problemid=m370" target="_blank" rel="external nofollow noopener noreferrer">題目連結</a></p><p>基本上有兩種做法：</p><ol><li>把所有位置讀進來，sort 之後做 lower_bound 掃比他大的跟比他小的有幾個，輸出比較大的順便輸出最前/最後的位置</li><li>讀位置的同時取最大最小值，並且分別紀錄比他大/小的數字有幾個，同時輸出最大/小值</li></ol><h3 id="作法一"><a class="header-anchor" href="#作法一"></a>作法一</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio ( <span class="literal">false</span> );</span><br><span class="line">    <span class="built_in">cin</span>.tie ( <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">cout</span>.tie ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n, x;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; n;</span><br><span class="line">    <span class="built_in">vector</span> &lt; <span class="keyword">int</span> &gt; lib ( n );</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">auto</span> &amp;i: lib )</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; i;</span><br><span class="line"></span><br><span class="line">    sort ( lib.begin(), lib.end() );</span><br><span class="line">    <span class="keyword">int</span> lb = lower_bound ( lib.begin(), lib.end(), x ) - lib.begin();</span><br><span class="line">    <span class="keyword">if</span> ( lb &lt; n - lb )</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; n - lb &lt;&lt; <span class="string">' '</span> &lt;&lt; lib.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; lb &lt;&lt; <span class="string">' '</span> &lt;&lt; lib[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="作法二"><a class="header-anchor" href="#作法二"></a>作法二</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio ( <span class="literal">false</span> );</span><br><span class="line">    <span class="built_in">cin</span>.tie ( <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">cout</span>.tie ( <span class="number">0</span> );</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> n, x, ma = <span class="number">-105</span>, mi = <span class="number">105</span>, cnt1 = <span class="number">0</span>, cnt2 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>, in ; i &lt; n ; i++ ) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; in;</span><br><span class="line">        ma = max ( ma, in );</span><br><span class="line">        mi = min ( mi, in );</span><br><span class="line">        <span class="keyword">if</span> ( in &gt;= x )</span><br><span class="line">            cnt1++;</span><br><span class="line">        <span class="keyword">if</span> ( in &lt;= x )</span><br><span class="line">            cnt2++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( cnt1 &gt; cnt2 )</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; cnt1 &lt;&lt; <span class="string">' '</span> &lt;&lt; ma &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; cnt2 &lt;&lt; <span class="string">' '</span> &lt;&lt; mi &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="Problem-2-卡牌遊戲"><a class="header-anchor" href="#Problem-2-卡牌遊戲"></a>Problem 2: 卡牌遊戲</h2><p><a href="https://zerojudge.tw/ShowProblem?problemid=m371" target="_blank" rel="external nofollow noopener noreferrer">題目連結</a></p><p>基本上就是暴力匹配，直到沒有新匹配成立的時候就結束 while 迴圈<br>每次匹配都往四個方向檢查，要注意的是可能有一個方向檢查到匹配了、把 lib[i][j] 改成 -1 了，就不要再繼續檢查，我為了方便起見寫在後面三個 for 迴圈的條件裡</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxN 55</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> lib[maxN][maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio ( <span class="literal">false</span> );</span><br><span class="line">    <span class="built_in">cin</span>.tie ( <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">cout</span>.tie ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n, m, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++ )</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; m ; j++ )</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; lib[i][j];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( flag ) &#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++ )</span><br><span class="line">            <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; m ; j++ ) &#123;</span><br><span class="line">                <span class="keyword">if</span> ( lib[i][j] == <span class="number">-1</span> )</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> ( <span class="keyword">int</span> k = <span class="number">1</span> ; i + k &lt; n ; k++ )</span><br><span class="line">                    <span class="keyword">if</span> ( lib[i][j] == lib[i + k][j] ) &#123;</span><br><span class="line">                        flag = <span class="literal">true</span>;</span><br><span class="line">                        ans += lib[i][j];</span><br><span class="line">                        lib[i][j] = lib[i + k][j] = <span class="number">-1</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> ( lib[i + k][j] != <span class="number">-1</span> )</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> ( <span class="keyword">int</span> k = <span class="number">1</span> ; <span class="number">0</span> &lt;= i - k &amp;&amp; lib[i][j] != <span class="number">-1</span> ; k++ )</span><br><span class="line">                    <span class="keyword">if</span> ( lib[i][j] == lib[i - k][j] ) &#123;</span><br><span class="line">                        flag = <span class="literal">true</span>;</span><br><span class="line">                        ans += lib[i][j];</span><br><span class="line">                        lib[i][j] = lib[i - k][j] = <span class="number">-1</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> ( lib[i - k][j] != <span class="number">-1</span> )</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> ( <span class="keyword">int</span> k = <span class="number">1</span> ; j + k &lt; m &amp;&amp; lib[i][j] != <span class="number">-1</span> ; k++ )</span><br><span class="line">                    <span class="keyword">if</span> ( lib[i][j] == lib[i][j + k] ) &#123;</span><br><span class="line">                        flag = <span class="literal">true</span>;</span><br><span class="line">                        ans += lib[i][j];</span><br><span class="line">                        lib[i][j] = lib[i][j + k] = <span class="number">-1</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> ( lib[i][j + k] != <span class="number">-1</span> )</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> ( <span class="keyword">int</span> k = <span class="number">1</span> ; <span class="number">0</span> &lt;= j - k &amp;&amp; lib[i][j] != <span class="number">-1</span> ; k++ )</span><br><span class="line">                    <span class="keyword">if</span> ( lib[i][j] == lib[i][j - k] ) &#123;</span><br><span class="line">                        flag = <span class="literal">true</span>;</span><br><span class="line">                        ans += lib[i][j];</span><br><span class="line">                        lib[i][j] = lib[i][j - k] = <span class="number">-1</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> ( lib[i][j - k] != <span class="number">-1</span> )</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="Problem-3-搬家"><a class="header-anchor" href="#Problem-3-搬家"></a>Problem 3: 搬家</h2><p><a href="https://zerojudge.tw/ShowProblem?problemid=m372" target="_blank" rel="external nofollow noopener noreferrer">題目連結</a></p><p>簡單來說就是檢查最大的水管聯通塊，所以寫一個 dfs 或 bfs 掃過去就好<br>不過要注意兩個相鄰的水管中間有沒有聯通，可能有其中一個方向不對就不聯通了</p><p>這邊我是用兩個 function <code>check_d</code> 和 <code>check_next</code>，分別檢查當前節點可以轉移的位置、和下一個位置能接受的轉移方向<br>另外這邊我使用轉移矩陣來檢查，所以這兩個 functino 中的 d 是對照到轉移矩陣的 index</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxN 505</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> lib[maxN][maxN];</span><br><span class="line"><span class="keyword">int</span> dx[<span class="number">4</span>] = &#123; <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span> &#125;, dy[<span class="number">4</span>] = &#123; <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span> &#125;;</span><br><span class="line"><span class="keyword">bool</span> vis[maxN][maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check_d</span> <span class="params">( <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> d )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'X'</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'I'</span> &amp;&amp; d % <span class="number">2</span> == <span class="number">1</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'H'</span> &amp;&amp; d % <span class="number">2</span> == <span class="number">0</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'L'</span> &amp;&amp; ( d == <span class="number">0</span> || d == <span class="number">3</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'7'</span> &amp;&amp; ( d == <span class="number">1</span> || d == <span class="number">2</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'F'</span> &amp;&amp; ( d == <span class="number">0</span> || d == <span class="number">1</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'J'</span> &amp;&amp; ( d == <span class="number">3</span> || d == <span class="number">2</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check_next</span> <span class="params">( <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> d )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'X'</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'I'</span> &amp;&amp; d % <span class="number">2</span> == <span class="number">1</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'H'</span> &amp;&amp; d % <span class="number">2</span> == <span class="number">0</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'L'</span> &amp;&amp; ( d == <span class="number">1</span> || d == <span class="number">2</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'7'</span> &amp;&amp; ( d == <span class="number">0</span> || d == <span class="number">3</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'F'</span> &amp;&amp; ( d == <span class="number">2</span> || d == <span class="number">3</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ( lib[x][y] == <span class="string">'J'</span> &amp;&amp; ( d == <span class="number">0</span> || d == <span class="number">1</span> ) )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span> <span class="params">( <span class="keyword">int</span> x, <span class="keyword">int</span> y )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nx, ny, res = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">queue</span> &lt; pair &lt; <span class="keyword">int</span>, <span class="keyword">int</span> &gt; &gt; q;</span><br><span class="line">    q.push ( make_pair ( x, y ) );</span><br><span class="line">    vis[x][y] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> ( !q.empty() ) &#123;</span><br><span class="line">        x = q.front().first, y = q.front().second;</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> d = <span class="number">0</span> ; d &lt; <span class="number">4</span> ; d++ ) &#123;</span><br><span class="line">            <span class="keyword">if</span> ( !check_d ( x, y, d ) )</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            nx = x + dx[d], ny = y + dy[d];</span><br><span class="line">            <span class="keyword">if</span> ( !check_next ( nx, ny, d ) )</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> ( vis[nx][ny] )</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            vis[nx][ny] = <span class="literal">true</span>;</span><br><span class="line">            res++;</span><br><span class="line">            q.push ( make_pair ( nx, ny ) );</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio ( <span class="literal">false</span> );</span><br><span class="line">    <span class="built_in">cin</span>.tie ( <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">cout</span>.tie ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n, m, ma = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n + <span class="number">1</span> ; i++ )</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;= m + <span class="number">1</span> ; j++ )</span><br><span class="line">            lib[i][j] = <span class="string">'0'</span>;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++ )</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= m ; j++ )</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; lib[i][j];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++ ) &#123;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= m ; j++ ) &#123;</span><br><span class="line">            <span class="keyword">if</span> ( vis[i][j] || lib[i][j] == <span class="string">'0'</span> )</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            ma = max ( bfs ( i, j ), ma );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ma &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="Problem-4-投資遊戲"><a class="header-anchor" href="#Problem-4-投資遊戲"></a>Problem 4: 投資遊戲</h2><p><a href="https://zerojudge.tw/ShowProblem?problemid=m373" target="_blank" rel="external nofollow noopener noreferrer">題目連結</a></p><p>基本上就是裸 dp</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxN 150005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxK 25</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[maxN][maxK], lib[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio ( <span class="literal">false</span> );</span><br><span class="line">    <span class="built_in">cin</span>.tie ( <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">cout</span>.tie ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n, k;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++ )</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; lib[i];</span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = lib[<span class="number">0</span>];</span><br><span class="line">    ans = max ( <span class="number">0l</span>l, lib[<span class="number">0</span>] );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++ ) &#123;</span><br><span class="line">        ans = max ( ans, dp[i][<span class="number">0</span>] = max ( <span class="number">0l</span>l, dp[i - <span class="number">1</span>][<span class="number">0</span>] ) + lib[i] );</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= k ; j++ ) &#123;</span><br><span class="line">            ans = max ( ans, dp[i][j] = max ( dp[i - <span class="number">1</span>][j] + lib[i], dp[i - <span class="number">1</span>][j - <span class="number">1</span>] ) );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>大概就是這樣，久違的寫個題目，如果有去考應該是可以順利五級分（吧</p></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author:</strong> MiohitoKiri5474</li><li class="post-copyright-link"><strong>Post link:</strong> <a href="https://miohitokiri5474.github.io/code/APCS-23-10/" title="[APCS] 2023年十月場實作題詳解">https://miohitokiri5474.github.io/code/APCS-23-10/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/code/tags/APCS/" rel="tag"># APCS</a> <a href="/code/tags/Full-Contest-Solution/" rel="tag"># Full Contest Solution</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/code/hexo-with-cicd/" rel="next" title="使用 CI/CD 自動部署 Hexo"><i class="fa fa-chevron-left"></i> 使用 CI/CD 自動部署 Hexo</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/code/TerminalSetup-2024/" rel="prev" title="個人環境建置 NeoVim with LazyVim">個人環境建置 NeoVim with LazyVim <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">Table of Contents</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">Overview</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/code/images/avatar.jpg" alt="MiohitoKiri5474"><p class="site-author-name" itemprop="name">MiohitoKiri5474</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/code/archives/%7C%7C%20archive"><span class="site-state-item-count">24</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-tags"><a href="/code/tags/index.html"><span class="site-state-item-count">31</span> <span class="site-state-item-name">tags</span></a></div></nav><div class="feed-link motion-element"><a href="/code/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/miohitokiri5474" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-globe"></i>GitHub</a> </span><span class="links-of-author-item"><a href="https://www.facebook.com/miohitokiri5474" target="_blank" title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-globe"></i>Facebook</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-1-機械鼠"><span class="nav-number">2.</span> <span class="nav-text">Problem 1: 機械鼠</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作法一"><span class="nav-number">2.1.</span> <span class="nav-text">作法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作法二"><span class="nav-number">2.2.</span> <span class="nav-text">作法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-2-卡牌遊戲"><span class="nav-number">3.</span> <span class="nav-text">Problem 2: 卡牌遊戲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-3-搬家"><span class="nav-number">4.</span> <span class="nav-text">Problem 3: 搬家</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-4-投資遊戲"><span class="nav-number">5.</span> <span class="nav-text">Problem 4: 投資遊戲</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2024</span> <span class="with-love"><i class="fa fa-"></i> </span><span class="author" itemprop="copyrightHolder">MiohitoKiri5474</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/code/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/code/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/code/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/code/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/code/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/code/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/code/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/code/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/javascript" src="/code/js/src/exturl.js?v=5.1.4"></script></body></html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta name="google-site-verification" content="m9sOVJZxIJPa9f7LP6pLEnLhZjHBWpXH9gPv4Vh2vOM"><script src="/code/lib/pace/pace.min.js?v=1.0.2"></script><link href="/code/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="google-site-verification" content="m9sOVJZxIJPa9f7LP6pLEnLhZjHBWpXH9gPv4Vh2vOM"><link href="/code/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/code/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/code/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/code/images/logo.jpg?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/code/images/logo.jpg?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/code/images/logo.jpg?v=5.1.4"><meta name="keywords" content="iTerm2,zsh,neoVim,"><link rel="alternate" href="/code/atom.xml" title="Coder MiohitoKiri" type="application/atom+xml"><meta name="description" content="前言最近開始重寫自己的一些 config，像是 vim 是 多年前跟學長 clone 過來的，zsh 是網路上模板亂抓，tmux 也是找 .tmux.conf.local 下來用因為總是會戳到不明錯誤，總是會造成不少麻煩，加上最近想要漸漸脫離 Sublime Text，所以在經過幾天的 vimrc 改造後決定要寫篇文章紀錄一下開始之前首先應該要有以下先備知識Command Line 使用經驗hom"><meta property="og:type" content="article"><meta property="og:title" content="個人環境建置：iTerm 2 + zsh + neoVim"><meta property="og:url" content="https://miohitokiri5474.github.io/code/terminalSetUp/index.html"><meta property="og:site_name" content="Coder MiohitoKiri"><meta property="og:description" content="前言最近開始重寫自己的一些 config，像是 vim 是 多年前跟學長 clone 過來的，zsh 是網路上模板亂抓，tmux 也是找 .tmux.conf.local 下來用因為總是會戳到不明錯誤，總是會造成不少麻煩，加上最近想要漸漸脫離 Sublime Text，所以在經過幾天的 vimrc 改造後決定要寫篇文章紀錄一下開始之前首先應該要有以下先備知識Command Line 使用經驗hom"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/itermScreenShot1.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/itermScreenShot2.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/powerlevel10k-mio.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/you-should-use.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/the-fuck.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/nvimScreenShot1.png"><meta property="og:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/nvimScreenShot2.png"><meta property="article:published_time" content="2021-09-13T09:54:39.000Z"><meta property="article:modified_time" content="2024-01-18T08:14:27.594Z"><meta property="article:author" content="MiohitoKiri5474"><meta property="article:tag" content="iTerm2"><meta property="article:tag" content="zsh"><meta property="article:tag" content="neoVim"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://miohitokiri5474.github.io/code/terminalSetUp/itermScreenShot1.png"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/code/",scheme:"Pisces",version:"5.1.4",sidebar:{position:"left",display:"always",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"Author"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://miohitokiri5474.github.io/code/terminalSetUp/"><title>個人環境建置：iTerm 2 + zsh + neoVim | Coder MiohitoKiri</title><script>!function(e,a,t,n,g,c){e.GoogleAnalyticsObject=n,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=+new Date,g=a.createElement(t),c=a.getElementsByTagName(t)[0],g.async=1,g.src="https://www.google-analytics.com/analytics.js",c.parentNode.insertBefore(g,c)}(window,document,"script","ga"),ga("create","UA-151767837-1","auto"),ga("send","pageview")</script><meta name="generator" content="Hexo 4.2.1"></head><body itemscope itemtype="http://schema.org/WebPage" lang="en"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/code/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Coder MiohitoKiri</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/code/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>Home</a></li><li class="menu-item menu-item-about"><a href="/code/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>About</a></li><li class="menu-item menu-item-tags"><a href="/code/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>Tags</a></li><li class="menu-item menu-item-archives"><a href="/code/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>Archives</a></li><li class="menu-item menu-item-main-page"><a href="https://miohitokiri5474.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-flag"></i><br>Main Page</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://miohitokiri5474.github.io/code/code/terminalSetUp/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="MiohitoKiri5474"><meta itemprop="description" content><meta itemprop="image" content="/code/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Coder MiohitoKiri"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">個人環境建置：iTerm 2 + zsh + neoVim</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-09-13T17:54:39+08:00">2021-09-13</time></span></div></header><div class="post-body" itemprop="articleBody"><h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2><p>最近開始重寫自己的一些 config，像是 vim 是 多年前跟學長 clone 過來的，zsh 是網路上模板亂抓，tmux 也是找 .tmux.conf.local 下來用<br>因為總是會戳到不明錯誤，總是會造成不少麻煩，加上最近想要漸漸脫離 Sublime Text，所以在經過幾天的 vimrc 改造後決定要寫篇文章紀錄一下</p><h2 id="開始之前"><a class="header-anchor" href="#開始之前"></a>開始之前</h2><p>首先應該要有以下先備知識</p><ul><li>Command Line 使用經驗</li><li>homebrew 安裝</li></ul><p>有以下經驗更佳</p><ul><li>vim 操作方法</li></ul><a id="more"></a><p><img src="itermScreenShot1.png" alt><br><img src="itermScreenShot2.png" alt></p><h2 id="iTerm-2-zsh"><a class="header-anchor" href="#iTerm-2-zsh"></a>iTerm 2 + zsh</h2><h3 id="iTerm-2"><a class="header-anchor" href="#iTerm-2"></a>iTerm 2</h3><p>因為接下來的工作環境都要在 Command line 下面完成，macOS 預設的 terminal app 設定修改麻煩，介面也沒有 iTerm 2 好看，所以我通常是使用 iTerm 2</p><p>安裝很簡單，打開 <code>terminal</code> 丟一行指令就好了</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install iterm</span><br></pre></td></tr></table></figure><blockquote><p>或是上 <a href="https://iterm2.com/" target="_blank" rel="external nofollow noopener noreferrer">iTerm2</a> 的官網下載</p></blockquote><p>再來是字體，因為等等要安裝的 zsh 有非 ASC-II 字元，所以需要安裝額外的字體<br>我這邊是使用 <code>SauceCodePro Nerd Font</code><br>如果不需要用一些花俏的 Theme，可以選擇一個順眼的等寬字體，通常好的字體有以下條件</p><ol><li>字元等寬<br>沒有對齊的程式碼看起來豆頁很疼</li><li>l, 1, i 要能夠清楚分辨<br>寫 code 時遇到這種智障事情絕對會降低效率</li></ol><p>這些字體通常很好找，這邊大力推薦 <code>Ubuntu-Mono</code></p><blockquote><p><code>Ubuntu-Mono</code> 也有提供 nerd font，但是支援度還是沒有 <code>SauceCodePro</code> 來的好，因此使用過一陣子後還是換回去 <code>SauceCodePro</code></p></blockquote><p>最後是調色，iTerm 2 的好處在這邊出現了，iTerm 2 可以匯入/匯出調色，所以可以把現在在用的顏色保存起來，未來換機器方便；或是上網抓別人調好的<br>像是我現在用的是 <a href="https://github.com/dracula/vim" target="_blank" rel="external nofollow noopener noreferrer"><code>Dracula</code></a>，除了 iTerm 2/vim 以外也有別的 IDE 可以使用，例如 <code>Sublime Text</code> 或 <code>Visual Studio Code</code> <s>Ｏ你 Electron</s> 都能使用</p><p>在 Preferences &gt; Profiles &gt; Colors 的右下角，匯入檔案後選擇 Dracula</p><h3 id="zsh"><a class="header-anchor" href="#zsh"></a>zsh</h3><p>設定完外觀，是時候來設定 zsh 了</p><p>雖然從 2019 年開始 macOS 已經把預設 shell 改成 zsh 了，不過我還是習慣敲一下這兩行指令，把 zsh 改成預設 shell</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c "echo $(which zsh) &gt;&gt; /etc/shells"</span><br><span class="line">chsh -s $(which zsh)</span><br></pre></td></tr></table></figure><p>接著是 zsh 的 theme<br>因為原始的 zsh 太難搞，所以這邊先下載一個 framework：<code>oh-my-zsh</code></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</span><br></pre></td></tr></table></figure><p>裝完 <code>oh-my-zsh</code> 後，接著就會看到換 theme 了<br>預設是用 <code>robbyrussell</code>，多了 git status，好多了</p><p>以前的 theme 是使用 powerlever9k（沒錯，七龍珠的哏），後來作者有推新版本 powerlever10k<br>基本上跟 10k 的風格一樣，不過有些更進階的功能，例如可以把已經完成的指令前後綴拿掉，只保留最新那一行的前後綴，比較容易專注在目前的指令上<br>以及有完整的簡易設定流程，有一些通用的設定（前綴狀態列要不要顯示 icon、狀態之間要用什麼符號連接，之類的）會在第一次開啟的時候執行</p><p><img src="powerlevel10k-mio.png" alt></p><p>再來一些套件的設定就按照個人的需求，這邊我安裝了以下幾樣：</p><ol><li><a href="https://github.com/MichaelAquilina/zsh-you-should-use" target="_blank" rel="external nofollow noopener noreferrer">you-should-use</a></li><li><a href="https://github.com/zsh-users/zsh-syntax-highlighting" target="_blank" rel="external nofollow noopener noreferrer">zsh-syntax-highlighting</a></li><li><a href="https://github.com/nvbn/thefuck" target="_blank" rel="external nofollow noopener noreferrer">thefuck</a></li></ol><p>稍微簡介一下</p><h4 id="you-should-use"><a class="header-anchor" href="#you-should-use"></a>you-should-use</h4><p>有時候會忘記自己曾經 alias 了一些東西，當時設定就是為了想少打字方便些（例如把 <code>git push</code> alias 成 <code>gp</code>），結果最後還是會忘記用，每天浪費不少時間在敲指令上<br><code>you-should-use</code> 就會在使用已經 alias 過的指令時跳出提醒，告訴你已經 alias 過了，下次可以改用 alias 過的指令</p><p><img src="you-should-use.png" alt></p><h4 id="zsh-syntax-highlighting"><a class="header-anchor" href="#zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h4><p>寫 code 的時候習慣有 highlighting，敲指令的時候沒有好不習慣<br>當時抱持著這種心情裝 <code>zsh-syntax-highlighting</code>，後來才發現在使用存在的指令時顯示綠色，不存在的指令顯示紅色、對於可用的檔案位置會畫底線等好處</p><h4 id="thefuck"><a class="header-anchor" href="#thefuck"></a>thefuck</h4><p>這大概是我見過最人性的套件了<br>敲指令敲多了偶爾會手指打結，少敲了點東西，像是</p><ul><li><code>apt-get</code> 少一個 <code>-</code> 變成 <code>aptget</code></li><li>敲 <code>python</code> 時手指太粗敲成 <code>puthon</code></li><li>跑 <code>pacman</code> 時忘記開 <code>sudo</code></li></ul><p>這些惱人的問題總是會在工作到一半時突然出現，總是會很想罵句 What the f***<br>於是有人開發出這個套件，出包的時候敲個 <code>fuck</code>，會從上一次敲的指令中，找出符合的指令（如果有多個選項則會顯示最相關的），多敲個 <code>&lt;Enter&gt;</code> 就執行</p><p><img src="the-fuck.png" alt></p><p><code>apt-get</code> permission denied? fuck<br><code>puthon main.py</code> zsh: command not found? fuck<br>no girl friend? fuck</p><h2 id="neoVim"><a class="header-anchor" href="#neoVim"></a>neoVim</h2><p>基本的環境建置完了，接著換處理編輯器<br>以前我都是會用 IDE 來寫 code，通常我是用 Sublime Text 3<br>不過在去年換筆電時，因為某些原因短暫的用過 Arch 當作主系統<br>還有各種麻煩的套件設定（當時期末一堆事情，沒辦法花太多時間搞這個）<br>變成長時間用 vim 來寫 code，習慣了之後手指離不開 <code>hjkl</code>（vim 重度使用者的毛病）<br>加上 Sublime Text 當時的社群幾乎死了，許多套件沒有在維護，而且新套件非常少<br>以上種種原因讓我拿到新筆電後，便完全捨棄 Sublime Text 了</p><p>兩個編輯器的轉換我幾乎沒有什麼障礙，主要也是我一直以來都只把 Sublime Text 當作編輯器<br>要編譯等麻煩的工作還是會切到 Terminal<br>因此相較於 GUI 的環境，我還比較適合使用 CLI 的編輯器<br>這也是讓我決定跳到 vim 的理由之一</p><h3 id="neoVim-vim-vi"><a class="header-anchor" href="#neoVim-vim-vi"></a>neoVim? vim? vi?</h3><p>對於初學的人來說可能會有點混淆，三個名字長這麼像的東西有什麼差別？<br>的確都是純文字編輯器，基本操作也相同，不過還是有細微上的差異<br>最早的編輯器是 <code>vi</code>，操作可以沿用至 vim 跟 neoVim，不過對於方向鍵以及 plugin 的支援度沒有另外兩者高<br>而 vim 以及 neoVim 是孿生兄弟，兩者的主要差異因為對於多工（<code>job</code>）的呼叫函數不同，因此部分插件無法通用，其餘的操作部分兩者差異不大</p><p>至於為什麼已經有 vim 了還會有 neoVim 呢？<br>這是一個很長的故事，這邊簡單帶一下，詳細的文章可以來看這篇文章 <a href="https://jdhao.github.io/2020/01/12/vim_nvim_history_development/" target="_blank" rel="external nofollow noopener noreferrer">Vim 和 Neovim 的前世今生</a></p><p>vim 是Bram Moolenaar 於相當早期的專案，發表時 <code>git</code> 還要十多年才被 Linus 開發出來<br>因此其他開發者想要為 vim 貢獻 code 只能依靠寄 email 給 Bram，相較於其他現在的主要大型專案都依賴 git 的 pull request，算是很落後的方式<br>即便現在已經將 vim 放到 <code>github</code> 上託管，vim 的貢獻依然要將 code 寄給 Bram，再由 Bram push 上 <code>github</code></p><p>而當時 neoVim 開發時，vim 還沒新增多工功能<br>也就是說在 vim build project 或是 <code>vim-plug</code> update 會讓 vim 整個卡死<br>而 neoVim 的發起人 tarruda 曾經寄一個 patch 給 Bram，該 patch 正是幫 vim 新增多工功能，但是不知道為什麼 Bram 始終沒有接受<br>因此 tarruda 將當時的 vim fork 出來，改成以現在主流的開源開發方式，並且將 vim 背後雜亂的 code 清理並重構，並且新增了許多功能（像是多工，或是預設一些對使用者方便的 config）<br>也因此逼 vim 需要跟上 neoVim 的步伐，許多功能都是在 neoVim 上先實作出來，vim 才跟上腳步加入的</p><p>至於 vim 以及 neoVim 因為對於多工的實踐不同，有些套件也無法通用<br>除此之外，vim 以及 neoVim 的設定檔位置也不同，vim 為根目錄的 <code>.vimrc</code>、套件檔則是放在 <code>.vim</code> 裡，而 neoVim 是和其他套件的設定檔一起放在 <code>.config/</code> 中、設定檔則是在 <code>.config/nvim/init.vim</code></p><h3 id="Plug-in-Manager"><a class="header-anchor" href="#Plug-in-Manager"></a>Plug-in Manager</h3><p>用各種編輯器肯定不會完全符合自己的需求（除非是自己開發的）<br>因此會用各種插件來輔助自己的工作應該也是很合理的<br>一個一個插件自己安裝相當麻煩，同時還要注意各個插件有沒有更新<br>因此會安裝一個 Plugin Manager 來輔助我們同步以及安裝插件<br>目前主流常見的有這幾個，選自己喜歡的一個來用就好</p><h4 id="Pathogen"><a class="header-anchor" href="#Pathogen"></a><a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="external nofollow noopener noreferrer">Pathogen</a></h4><p>與其說是 plugin manager，不如說只是個 run-time loader<br>把要用的 plugin 自己丟進 <code>bundle</code> 底下就完工了<br>刪除也很簡單，把 <code>bundle</code> 底下的資料夾刪掉就好</p><h4 id="Vundle"><a class="header-anchor" href="#Vundle"></a><a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external nofollow noopener noreferrer">Vundle</a></h4><p>Vundle 在 github 上的星星應該是這三者最多的<br>使用起來相當簡單，在 <code>.vimrc</code> 裡面打上 plugin 的名稱</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plugin <span class="string">'vim-scripts/taglist.vim'</span></span><br></pre></td></tr></table></figure><p>然後執行 <code>:PluginInstall</code>，就會幫你安裝<br>這樣換新環境只要把 <code>.vimrc</code> 放到根目錄，跑一次 <code>:PluginInstall</code> 就好了</p><h4 id="vim-Plug"><a class="header-anchor" href="#vim-Plug"></a><a href="https://github.com/junegunn/vim-plug" target="_blank" rel="external nofollow noopener noreferrer">vim-Plug</a></h4><p>個人覺得功能最強大的 plugin manager，也是我正在使用的<br>使用方法跟 Vundle 差不多，一樣是在 <code>.vimrc</code> 裡面加上要用的 plugin 名稱</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug <span class="string">'vim-scripts/taglist.vim'</span></span><br></pre></td></tr></table></figure><p>不過用的關鍵字不同，指令也不一樣，要安裝更新要用 <code>:PlugInstall</code><br>但是與 Vundle 不同的是，他有 <strong>on-demand loading</strong><br>像是 <code>vim-go</code> 這種只有在寫 Golang 時才會用到的插件，就可以設定只有在開啟 <code>.go</code> 時的檔案才會 load<br>Nerd tree 也是，在平常不需要使用時便不會啟動，可以設定成啟動時才載入<br>在安裝許多 plugin 時可以加快開啟速度</p><h3 id="Plugins"><a class="header-anchor" href="#Plugins"></a>Plugins</h3><p>裝完 plugin manager 之後就可以開始裝 plugin 了，這邊列出我有在用的 plugin</p><h4 id="Plugin-Manager"><a class="header-anchor" href="#Plugin-Manager"></a>Plugin Manager</h4><ul><li><a href="https://github.com/junegunn/vim-plug" target="_blank" rel="external nofollow noopener noreferrer">junejunn/vim-plug</a></li></ul><h4 id="airline"><a class="header-anchor" href="#airline"></a>airline</h4><ul><li><a href="https://github.com/vim-airline/vim-airline" target="_blank" rel="external nofollow noopener noreferrer">vim-airline/vim-airline</a></li><li><a href="https://github.com/vim-airline/vim-airline-themes" target="_blank" rel="external nofollow noopener noreferrer">vim-airline/vim-airline-themes</a></li></ul><h4 id="fzf"><a class="header-anchor" href="#fzf"></a>fzf</h4><ul><li><a href="https://github.com/junegunn/fzf" target="_blank" rel="external nofollow noopener noreferrer">junegunn/fzf</a></li><li><a href="https://github.com/junegunn/fzf.vim" target="_blank" rel="external nofollow noopener noreferrer">junegunn/fzf.vim</a></li></ul><h4 id="tag"><a class="header-anchor" href="#tag"></a>tag</h4><ul><li><a href="https://github.com/vim-scripts/taglist.vim" target="_blank" rel="external nofollow noopener noreferrer">vim-scropts/taglist.vim</a></li><li><a href="https://github.com/preservim/tagbar" target="_blank" rel="external nofollow noopener noreferrer">preservim/tagbar</a></li></ul><h4 id="git-support"><a class="header-anchor" href="#git-support"></a>git-support</h4><ul><li><a href="https://github.com/motemen/git-vim" target="_blank" rel="external nofollow noopener noreferrer">motemem/git-vim</a></li><li><a href="https://github.com/airblade/vim-gitgutter" target="_blank" rel="external nofollow noopener noreferrer">airblade/vim-gitgutter</a></li></ul><h4 id="auto-completion-lsp"><a class="header-anchor" href="#auto-completion-lsp"></a>auto completion &amp; lsp</h4><ul><li><a href="https://github.com/neovim/nvim-lspconfig" target="_blank" rel="external nofollow noopener noreferrer">neovim/nvim-lspconfig</a></li><li><a href="https://github.com/nvim-lua/completion-nvim" target="_blank" rel="external nofollow noopener noreferrer">nvim-lua/completion-nvim</a></li><li><a href="https://github.com/nvim-lua/lsp-status.nvim" target="_blank" rel="external nofollow noopener noreferrer">nvim-lua/lsp-status.nvim</a></li></ul><h4 id="something-else"><a class="header-anchor" href="#something-else"></a>something else</h4><p>Nerd tree</p><ul><li><a href="https://github.com/Shougo/defx.nvim" target="_blank" rel="external nofollow noopener noreferrer">Shouge/defx.nvim</a></li></ul><p>Golang support</p><ul><li><a href="https://github.com/fatih/vim-go" target="_blank" rel="external nofollow noopener noreferrer">fatih/vim-go</a></li></ul><p>Goyo</p><ul><li><a href="https://github.com/junegunn/goyo.vim" target="_blank" rel="external nofollow noopener noreferrer">junegunn/goyo.vim</a></li></ul><p>Color Theme</p><ul><li><a href="https://github.com/folke/tokyonight.nvim" target="_blank" rel="external nofollow noopener noreferrer">folke/tokyonight.nvim</a></li><li><a href="https://github.com/frazrepo/vim-rainbow" target="_blank" rel="external nofollow noopener noreferrer">frazrepo/vim-rainbow</a></li></ul><p>現在的截圖</p><p><img src="nvimScreenShot1.png" alt><br><img src="nvimScreenShot2.png" alt></p><p>大多數 plugin 沒有做過多的設定，即便有設定也只有做最基礎的<br>詳細的可以到我的 github 看 <a href="https://github.com/MiohitoKiri5474/nvim/blob/master/init.vim" target="_blank" rel="external nofollow noopener noreferrer">init.vim</a><br>而 LSP 以及 defx 的部分可以看 amikai 大大寫的文章 <a href="https://amikai.github.io/2020/09/03/go_neovim_env/" target="_blank" rel="external nofollow noopener noreferrer">Golang 開發環境 - 使用 neovim</a></p><blockquote><p>雖然個人比較推薦 defx，不過 defx 需要大量的手動設定，有些人可能經不起中間的踩雷過程<br>想要避免這部分麻煩的建議使用 <a href="https://github.com/preservim/nerdtree" target="_blank" rel="external nofollow noopener noreferrer">NERDTree</a> 就好，比較老牌、討論的人也多，而且大多數情況下也夠用</p></blockquote><h2 id="結語"><a class="header-anchor" href="#結語"></a>結語</h2><p>感謝看到這邊的各位，這是一篇難產很久的文章<br>從去年九月一路拖到現在，中間各種事情（像是躺在床上發懶）導致這篇文章拖到現在才寫出來<br>最近想要把這邊改成一些寫 code 或打比賽的心得，像是過往那種題解會開始減少<br>一來是最近題目越來越寫不動，而且回頭看當時一些文章會開始有一些「當初怎麼會寫這些」的想法<br>找不太到寫題解的感覺了，不如就先暫時放著吧</p><p>另外截圖中底部那一條狀態列是 iterm 內建的，再往上那一條是 <code>tmux</code>，因為沒有設定太多東西，我需要的功能也不多，因此直接抓別人的來用，想要有好看一點的 tmux 可以直接複製 <a href="https://github.com/MiohitoKiri5474/.tmuxhttps://github.com/frazrepo/vim-rainbow" target="_blank" rel="external nofollow noopener noreferrer">我的 tmux config</a></p></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author:</strong> MiohitoKiri5474</li><li class="post-copyright-link"><strong>Post link:</strong> <a href="https://miohitokiri5474.github.io/code/terminalSetUp/" title="個人環境建置：iTerm 2 + zsh + neoVim">https://miohitokiri5474.github.io/code/terminalSetUp/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/code/tags/iTerm2/" rel="tag"># iTerm2</a> <a href="/code/tags/zsh/" rel="tag"># zsh</a> <a href="/code/tags/neoVim/" rel="tag"># neoVim</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/code/ncku-icpc-2020-week9-dlc/" rel="next" title="進階資料結構 for NCKU-ICPC Week 9"><i class="fa fa-chevron-left"></i> 進階資料結構 for NCKU-ICPC Week 9</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/code/hexo-with-cicd/" rel="prev" title="使用 CI/CD 自動部署 Hexo">使用 CI/CD 自動部署 Hexo <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">Table of Contents</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">Overview</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/code/images/avatar.jpg" alt="MiohitoKiri5474"><p class="site-author-name" itemprop="name">MiohitoKiri5474</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/code/archives/%7C%7C%20archive"><span class="site-state-item-count">24</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-tags"><a href="/code/tags/index.html"><span class="site-state-item-count">31</span> <span class="site-state-item-name">tags</span></a></div></nav><div class="feed-link motion-element"><a href="/code/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/miohitokiri5474" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-globe"></i>GitHub</a> </span><span class="links-of-author-item"><a href="https://www.facebook.com/miohitokiri5474" target="_blank" title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-globe"></i>Facebook</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開始之前"><span class="nav-number">2.</span> <span class="nav-text">開始之前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iTerm-2-zsh"><span class="nav-number">3.</span> <span class="nav-text">iTerm 2 + zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iTerm-2"><span class="nav-number">3.1.</span> <span class="nav-text">iTerm 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh"><span class="nav-number">3.2.</span> <span class="nav-text">zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#you-should-use"><span class="nav-number">3.2.1.</span> <span class="nav-text">you-should-use</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zsh-syntax-highlighting"><span class="nav-number">3.2.2.</span> <span class="nav-text">zsh-syntax-highlighting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thefuck"><span class="nav-number">3.2.3.</span> <span class="nav-text">thefuck</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#neoVim"><span class="nav-number">4.</span> <span class="nav-text">neoVim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#neoVim-vim-vi"><span class="nav-number">4.1.</span> <span class="nav-text">neoVim? vim? vi?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plug-in-Manager"><span class="nav-number">4.2.</span> <span class="nav-text">Plug-in Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pathogen"><span class="nav-number">4.2.1.</span> <span class="nav-text">Pathogen</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vundle"><span class="nav-number">4.2.2.</span> <span class="nav-text">Vundle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vim-Plug"><span class="nav-number">4.2.3.</span> <span class="nav-text">vim-Plug</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plugins"><span class="nav-number">4.3.</span> <span class="nav-text">Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Plugin-Manager"><span class="nav-number">4.3.1.</span> <span class="nav-text">Plugin Manager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#airline"><span class="nav-number">4.3.2.</span> <span class="nav-text">airline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fzf"><span class="nav-number">4.3.3.</span> <span class="nav-text">fzf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tag"><span class="nav-number">4.3.4.</span> <span class="nav-text">tag</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-support"><span class="nav-number">4.3.5.</span> <span class="nav-text">git-support</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#auto-completion-lsp"><span class="nav-number">4.3.6.</span> <span class="nav-text">auto completion &amp; lsp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#something-else"><span class="nav-number">4.3.7.</span> <span class="nav-text">something else</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2024</span> <span class="with-love"><i class="fa fa-"></i> </span><span class="author" itemprop="copyrightHolder">MiohitoKiri5474</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/code/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/code/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/code/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/code/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/code/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/code/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/code/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/code/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/code/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/javascript" src="/code/js/src/exturl.js?v=5.1.4"></script></body></html>
